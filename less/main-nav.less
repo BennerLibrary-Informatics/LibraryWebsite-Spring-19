@@ -1,0 +1,285 @@
+/* main-nav.less */
+//The main navigation, the drop down menues on the desktop and the of canvas nav on tablet and mobile.
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@import "mixins.less";
+@import "media-controllers.less";
+@import "variables.less";
+
+@phone-nav-width: 85%;
+@tablet-nav-width: 40%;
+@nav-list-max-height: 350px;
+
+#main-nav {
+	width: @phone-nav-width;
+	margin-left: 100-@phone-nav-width;
+	border-bottom: 1px solid #666;
+	visibility: hidden;
+
+	a {
+		text-decoration: none;
+		color: #000;
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+	}
+
+	> ul {
+
+		> li {
+			border-top: 1px solid #666;
+
+			> a {
+				.transition(border-color 300ms);
+				font-size: 20px;
+				padding: 7px 10px;
+				background: url('/img/css/small-arrow-down.png') no-repeat 95% 50%;
+				border-bottom: 1px solid #cfcfcf;
+				display: block
+			}
+
+			> ul {
+				border-top: 1px solid #666;
+				padding: 0;
+				border: none;
+				background: rgba(120, 120, 120, 0.15);
+				border: none;
+				-webkit-transition: max-height 300ms ease;
+				transition: max-height 300ms ease;
+				max-height: 0;
+				overflow: hidden;
+
+				> li {
+
+					> a {
+						font-size: 16px;
+						padding: 6px 10px;
+					}
+
+					&:first-of-type {
+						a {
+							padding-top: 12px;
+						}
+					}
+
+					&:last-of-type {
+						a {
+							padding-bottom: 12px;
+						}
+					}
+				}
+
+				a {
+					padding-bottom: 6px;
+					line-height: 1;
+					display: block;
+
+					&:hover{
+						text-decoration: underline;
+					}
+				}
+			}
+
+			//open lists within the nav
+			&.open {
+				> a {
+					border-bottom-color: #666;
+					background: url('/img/css/small-arrow-up.png') no-repeat 95% 50%;
+				}
+
+				ul {
+					max-height: @nav-list-max-height;
+				}
+			}
+		}
+	}
+}
+
+#inner-container {
+	position: absolute;
+	top: 0;
+	z-index: 500;
+}
+
+//open & close rules
+
+.main-nav-open {
+
+	#main-nav {
+		visibility: visible;
+	}
+}
+.no-csstransforms.main-nav-open #inner-container {
+	left: -1*@phone-nav-width;
+}
+
+//no javascrpt
+.no-js {
+
+	#inner-container {
+		position: static;
+		top: 0;
+		z-index: 500;
+	}
+
+	#main-nav {
+		visibility: visible;
+		width: 100%;
+		margin: 0;
+
+		> ul {
+			> li {
+				> a {
+					border-bottom: 1px solid #cfcfcf;
+					display: block;
+				}
+
+				> ul {
+					display: none;
+					border-top: 1px solid #666;
+					padding-bottom: 10px;
+				}
+			}
+		}
+	}
+}
+
+//~~~~~~~~~~~ End All ~~~~~~~~~~~~~
+
+//~~~~~~~~~~~~ Phone-tablet  ~~~~~~~~~~
+@media @phone-tablet { //~~~~~~~~~~~~~~
+.main-nav-open {
+
+	#inner-container {
+		.transform(translateX(-1*@phone-nav-width));
+	}
+}
+}//~~~~~~~~~~~ End Phone-tablet  ~~~~~~
+
+//~~~~~~~~~~~~ Tablet  ~~~~~~~~~~~~~~~~
+@media @tablet { //~~~~~~~~~~~~~~~~~~~~
+
+#main-nav {
+	width: @tablet-nav-width;
+	margin-left: 100-@tablet-nav-width;
+}
+.main-nav-open  {
+	#inner-container {
+		.transform(translateX(-1*@tablet-nav-width));
+	}
+}
+.no-csstransforms.main-nav-open  {
+	#inner-container {
+		right: @tablet-nav-width;
+	}
+}
+
+
+}//~~~~~~~~~~~ End Tablet  ~~~~~~~~~~~~
+
+//~~~~~~~~~~~~ Desktop  ~~~~~~~~~~~~~~~
+@media @desktop { //~~~~~~~~~~~~~~~~~~~
+
+#main-nav {
+	position: absolute;
+	visibility: visible;
+	top: 0;
+	right: 0;
+	z-index: 1000;
+	width: auto;
+	border: none;
+
+	> ul {
+		padding: 26px 34px;
+
+		> li {
+			margin-right: 4px;
+			float: left;
+			position:  relative;
+			border: none;
+
+			&:hover,
+			&.hover
+			{
+				background: rgb(151, 142, 165);
+				background: rgba(175, 175, 175, 0.25);
+
+				> ul {
+					display: block;
+				}
+			}
+
+			> a {
+				background: none;
+				display: block;
+				padding: 6px;
+				color: #fff;
+				border: none;
+				font-size: @f-size;
+			}
+
+			&.open {
+				a {
+					background: none;
+				}
+			}
+
+			ul {
+				max-height: none;
+				padding: 6px;
+				background: #cfcfcf;
+				position: absolute;
+				top: 100%;
+				display: none;
+				width: 120px;
+				border: @c-purple 1px solid;
+
+				li {
+
+					a {
+						display: block;
+						color: #000;
+						padding: 4px 0;
+
+						&:hover {
+							text-decoration: underline;
+						};
+
+					}
+
+					&:first-of-type {
+						a {
+							padding-top: 3px;
+						}
+					}
+
+					&:last-of-type {
+						a {
+							padding-bottom: 3px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.no-js {
+
+	#main-nav {
+		width: auto;
+
+		> ul {
+			> li {
+				> a {
+					border-bottom: none;
+				}
+			}
+		}
+	}
+}
+
+}//~~~~~~~~~~~ End Desktop  ~~~~~~~~~~~

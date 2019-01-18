@@ -1,0 +1,304 @@
+/* File Name: main.css
+ * OpenSource Software Name:  Dynamic Content On Demand - DCOD
+ *
+ * Developer: Bruce Cheek, Michael Kirkpatrick, Matt Marcukaitis
+ * Project Managers: Profs Ann Johnston and Craighton Hippenhammer,
+ *     Benner Library and Resource Center, Olivet Nazarene University
+ * If you use this code, let a project manager know at
+ * oss-lib@olivet.edu. Thank you.
+ * Copyright (C) 2013 Olivet Nazarene University
+ *
+ * This file is part of DCOD.
+ *
+ * DCOD is free software: you can redistribute it and/or modify
+ * it under the terms of the Creative Commons CC-BY license at
+ * http://creativecommons.org/licenses/by/3.0/
+ * 
+ * This license lets you distribute, remix, tweak, and build upon
+ * our work, even commercially, as long as you credit us for the
+ * original creation. 
+ * 
+ * 
+ * You are free:
+ *    to Share — to copy, distribute and transmit the work
+ *    to Remix — to adapt the work
+ *    to make commercial use of the work
+
+ * Under the following conditions:
+ *    Attribution — You must attribute the work in the manner
+ * specified by the author or licensor (but not in any way that
+ * suggests that they endorse you or your use of the work) with the
+ * understanding that:
+ *    Waiver — Any of the above conditions can be waived if you get
+ * permission from the copyright holder.
+ *    Public Domain — Where the work or any of its elements is in the
+ * public domain under applicable law, that status is in no way
+ * affected by the license.
+ *    Other Rights — In no way are any of the following rights
+ * affected by the license:
+ *    Your fair dealing or fair use rights, or other applicable
+ * copyright exceptions and limitations;
+ *    The author's moral rights;
+ *    Rights other persons may have either in the work itself or in
+ * how the work is used, such as publicity or privacy rights.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * CC-BY License for more details.
+ *
+ */
+
+.bookmark a            {border: 3px outset #ccc;
+                        float: left;
+                        cursor: pointer;}
+
+.bookmark a:hover        {border: 3px inset #ccc}
+
+.wordCloud             {text-align: center;
+                        max-width: 48em;
+                        margin: auto}
+
+.wordCloud             {width:48em;
+}
+
+.wordCloud a           {color: #0d0dcc}
+
+#noBullet              {list-style-type: none;
+                        padding-left: 5px;
+                        width: 100%}
+
+#noBullet li           {border: none;
+                        margin-bottom: 5px}
+
+a:hover                {text-decoration: none;
+                        color:#FFFFFF;
+                        background-color: #7B72D8;}
+
+#page-wrapper          {width:98%;
+                        min-height:100%;
+                        height: auto !important;
+                        height: 100%;
+                        margin: 0 auto -60px;}
+
+#content, #left, #right {float:left;}
+
+body                   {font-size:.85em;
+                        min-width:600px;
+                        height: 100%;
+                        margin: 0px 0px 0px 0px;
+                        font-family: Constantina,Georgia,'Nimbus Roman No9 L',serif;
+                        background-image:url('../images/gradient_squares4.png');}
+
+H3                     {margin:0em;}
+
+.center               {text-align: center;}
+.left                 {text-align:left;}
+.right                {text-align: right;}
+
+.font8                 {font-size:.7em;}
+
+.boxTitle              {background-color:#7b72d8;
+                        color:#EDEDED;
+                        margin:0;
+                        padding:.2em;
+                        padding-top:0;}
+
+.box                   {float:left;
+                        background-color:white;
+                        margin-top:0em;
+                        margin-bottom:.5em;
+                        margin-right:.5em;
+                        border:solid 2px #BFBFBF;
+                        padding:.5em;
+                        padding-top:0;} 
+
+.tableA                 {border-spacing: 10px;
+                         border-collapse: collapse;}
+
+.tableB                {border-collapse: collapse;
+                        border: #000000;
+                        background-color: #E0E0E0;
+                        color: #000000;}
+
+.tableC                {border-collapse: collapse;
+                        border: #000000;
+                        background-color: #CB6666;}
+
+.tableD                {border-collapse: collapse;
+                        background-color: #D3D6FF}
+
+.tableE                {border-collapse: collapse;
+                        border: #000000;
+                        background-color: #EFEFEF;}
+
+.tableA th             {border-bottom: solid 0.25em black;}
+
+.tableB th             {background-color: #EEEEEE; border-bottom: solid 0.25em black;}
+
+.tableB td             {padding: .25em;
+                        border: 1px solid;}
+
+.tableC td             {padding: .25em;
+                        border: 1px solid;}
+
+.tableD td             {padding: .25em;
+                        border: 1px solid;}
+
+.tableD th             {padding: .25em;
+                        border: 1px solid;}
+
+.tableE td             {padding: .25em;
+                        border: 1px solid;}
+
+.error                  {color:red;
+                         font-weight:bold}
+
+.expand{padding-bottom:.75em}
+.expand a {
+  display:block;
+  padding:3px 10px
+}
+.expand a:link, .expand a:visited {
+  border-width:1px;
+  background-image:url(../images/collapse_arrow_down.png);
+  background-repeat:no-repeat;
+  background-position:98% 50%;
+}
+.expand a:hover, .expand a:active, .expand a:focus {
+  text-decoration:underline
+}
+.expand a.open:link, .expand a.open:visited {
+  border-style:solid;
+  background:#eee url(../images/collapse_arrow_up.png) no-repeat 98% 50%
+}
+.demo {
+  margin:0;
+  padding:1.5em 1.5em 0.75em;
+  border:1px solid #ccc;
+  position:relative;
+  overflow:hidden
+}
+
+.headText1 {
+    font-family: Constantina,Georgia,'Nimbus Roman No9 L',serif;
+    font-size: 1.7em;
+    text-align: center;
+    
+}
+
+.headText2 {
+    font-family: Constantina,Georgia,'Nimbus Roman No9 L',serif;
+    font-size: 1.2em;
+    text-align: center;
+    font-style: italic;
+}   
+
+.skinny{
+    width: 100%;
+    margin: 0px;
+    padding: 6px 31px 6px 31px;
+    border:none;
+    cursor: pointer;
+    background-color: #F0F0F0;
+    background-image: url('../images/collapse_arrow_up.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-origin: content-box;
+}
+
+#recentlyAddedBtn, #mostAccessedBtn, #catCloudBtn, #tagCloudBtn {
+    background-image: url('../images/collapse_arrow_down.png');
+}
+
+.result_list li {
+    line-height: 26px;
+}
+
+.searchButton{
+    background-image: url('../images/search1.png');
+    height: 32px;
+    width:88px;
+    border:2px outset #DDDDDD;
+    font-weight: bold;
+    color: #5C5C5C;
+}
+
+.searchButton:hover{
+    background-image: url('../images/search2.png');
+    border:2px outset #EEEEEE;
+    color: #3E607C;
+}
+
+.searchButton:active{
+    background-image: url('../images/search3.png');
+    border:2px inset #DDDDDD;
+    color: #000000;
+}
+
+a.link1:link {
+    color:#FF7537;
+    border:none} 
+
+a.link1:visited {color:#FF7537;}
+
+a.link1:hover {
+    color:#FFFFFF;
+    background-color:#FF7537;
+} 
+
+a.link1:active {color:#FF7537;}
+
+a.homeLink{
+    border:none;
+}
+
+a.homeLink:visited{
+    border:none;
+}
+
+a.homeLink:hover{
+    border:none;
+    background-color:white;
+}
+
+a.homeLink:active{
+    border:none;
+}
+
+img.homeLink{
+    border:none;
+}
+
+img.homeLink:visited{
+    border:none;
+}
+
+img.homeLink:hover{
+    border:none;   
+}
+
+img.homeLink:active{
+    border:none;
+}
+
+#top {
+    margin-top: 8px;
+}
+
+#bottom {
+    text-align: center;
+    height: 40px;
+    margin-left: 1%;
+    width: 96%;
+}
+
+#push {
+    height: 60px;
+    clear: both;
+}
+
+.help, .help:hover {
+    background-color: white;
+    vertical-align: middle;
+}

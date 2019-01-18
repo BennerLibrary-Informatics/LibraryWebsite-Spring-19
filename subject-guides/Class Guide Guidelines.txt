@@ -1,0 +1,9 @@
+Course Guides:
+1.  Change breadcrumbs for all caps on Class Codes
+2.  <h2 class="header-line">
+3.  Make sure there are know proxy prefix addresses for databases or library tools (these are acceptable for articles)
+4.  Make sure there are no cybrarian purl links
+5.  Article citations should having hanging indent unless specified other than APA             
+	<div class="padding15-left">
+		<div class="hanging-indent">
+6.  <p>This page was created by <a href='/departments/instructional-services/contact.php?id=5' target="_blank">Jasmine Cieszynski</a>, Instructional Services Librarian on October 8, 2014. <!--Last updated ...--></p>

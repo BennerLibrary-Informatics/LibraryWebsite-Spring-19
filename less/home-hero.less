@@ -1,0 +1,117 @@
+/* _template.less */
+//Description
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@import "mixins.less";
+@import "variables.less";
+@import "media-controllers.less";
+
+#home-hero {
+	margin: 0 10px 10px 10px;
+	margin: 0 10px 10px 10px;
+	border: 1px solid #333;
+	position: relative;
+	overflow: hidden;
+	// background: url('/img/css/home-page/IMG_2392.jpg');
+	// moved to index.php
+}
+
+#home-hero > ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	> li {
+		> a { //nav items
+			display: block;
+			width: 25%;
+			.border-box;
+			border-right: 1px solid #333;
+			border-bottom: 1px solid #333;
+			text-align: center;
+			font-size: 17px;
+			padding: 15px 0;
+			font-family: @f-title;
+			color: #000;
+			text-decoration: none;
+			background: rgba(210, 210, 210, 0.8);
+			outline: none;
+
+			&:hover {
+				background: rgba(250, 250, 250, .8);
+			}
+		}
+	}
+
+	> li.open {
+		> a {
+			border-right: none;
+			background: rgba(250, 250, 250, 0.85);
+			padding-right: 1px;
+		}
+	}
+
+	> li:last-of-type { //get the last of the nav items
+		> a {
+			border-bottom:none;
+		}
+	}
+}
+
+.home-hero-section { //The second ul
+	display: none;
+	width: 75%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 5px;
+	margin: 0;
+	.border-box;
+	height: 100%;
+	list-style: none;
+	overflow: hidden;
+}
+
+li.open .home-hero-section { // the second ul opened
+	display: block;
+	background: rgba(250, 250, 250, 0.85);
+}
+
+.home-hero-section {
+	.link-list {
+		margin: 0;
+
+		li {
+			margin: 5px;
+		}
+
+		ul {
+			.border-box;
+		}
+
+		.stretch3-keep2 {
+			margin: 0 100%/4;
+		}
+	}
+}
+
+//~~~~~~~~~~~~ Phone  ~~~~~~~~~~~~~~~~~
+@media @phone { //~~~~~~~~~~~~~~~~~~~~~
+
+.home-hero-section {
+	display: none !important;
+}
+
+#home-hero {
+	margin-bottom: 20px;
+}
+
+#home-hero ul > li > a {
+	width: 100%;
+	border-right: none;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+}//~~~~~~~~~~~ End Phone  ~~~~~~~~~~~~~

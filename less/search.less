@@ -1,0 +1,151 @@
+/* _template.less */
+//Description
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@import "mixins.less";
+@import "media-controllers.less";
+
+	#search {
+		position: relative;
+
+		#more-search {
+			position: absolute;
+			height: 0px;
+			width: 230px;
+			background: #ccc;
+			z-index: 550;
+			-webkit-transition: height 100ms ease;
+			transition: height 100ms ease;
+			overflow: hidden;
+
+		}
+
+
+		input[type="text"] {
+ 		   margin: 0;
+ 		   width: 100%;
+ 		   border: 1px solid #777;
+ 		   background: #ccc;
+ 		   .border-box;
+ 		   .border-radius(0);
+ 		   display: block;
+ 		   outline: none;
+ 		   padding: 0;
+		}
+
+		input[type="submit"] {
+			width: 26px;
+			text-indent: -999px;
+			position: absolute;
+			top: 2px;
+			margin: 0;
+			z-index: 5;
+			border: none;
+			background: #777 url("/img/css/search.png") center no-repeat;
+			.border-radius(0);
+			cursor: pointer;
+			padding: 0;
+		}
+
+		label {
+			display: inline;
+			padding: 0;
+		}
+	}
+
+	#search.open {
+		#more-search {
+			height: 93px;
+			width: 228px;
+			border: 1px solid #666;
+		}
+	}
+
+	.svg #search {
+		input[type="submit"] {
+			background: #777 url("/img/css/search.svg") center no-repeat;
+		}
+	}
+
+
+
+//~~~~~~~~~~~ End All  ~~~~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone  ~~~~~~~~~~~~~~~~~
+@media @phone { //~~~~~~~~~~~~~~~~~~~~~
+
+	#search {
+		padding: 0 10px 10px 10px;
+
+		input[type="text"] {
+ 		   font-size: 16px;
+ 		   height: 28px;
+ 		   padding: 0 31px 0 5px;
+		}
+
+		input[type="submit"] {
+			height: 24px;
+			right: 12px;
+		}
+	}
+
+	#more-search {
+		height: 20px;
+		top: 27px;
+
+	}
+
+}//~~~~~~~~~~~ End Phone  ~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone-tablet  ~~~~~~~~~~
+@media @phone-tablet { //~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Phone-tablet  ~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet  ~~~~~~~~~~~~~~~~
+@media @tablet { //~~~~~~~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Tablet  ~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet-Desktop  ~~~~~~~~
+@media @tablet-desktop { //~~~~~~~~~~~~
+
+	#search {
+		float: right;
+		height: 22px;
+		margin: 4px 10px;
+		width: 230px;
+
+		input[type="text"] {
+			height: 22px;
+			padding: 0 31px 0 5px;
+		}
+
+		input[type="submit"] {
+			height: 18px;
+			right: 2px;
+		}
+	}
+
+	#more-search {
+		top: 100%;
+		right: 0;
+	}
+
+}//~~~~~~~~~~~ End Tablet-Desktop  ~~~~
+
+
+
+//~~~~~~~~~~~~ Desktop  ~~~~~~~~~~~~~~~
+@media @desktop { //~~~~~~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Desktop  ~~~~~~~~~~~

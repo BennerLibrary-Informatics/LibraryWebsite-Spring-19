@@ -1,0 +1,90 @@
+/* crumbs.less */
+//Description
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@import "variables.less";
+@import "media-controllers.less";
+
+#crumbs-search {
+	background: @c-purple;
+	margin: 5px 0 0 0;
+
+	ul {
+		list-style: none;
+		margin: 0;
+
+		li {
+			display: block;
+			float: left;
+			padding-right: 10px;
+			background: url("/img/css/crumb-spacer.png") no-repeat center right;
+
+			&.last {
+				background: none;
+			}
+
+			a {
+				height: 30px;
+				line-height: 30px;
+				padding: 0 10px;
+				color: #fff;
+				display: block;
+				text-decoration: none;
+			}
+
+		}
+	}
+}
+.svg #crumbs-search {
+	ul {
+		li {
+			background: url("/img/css/crumb-spacer.svg") no-repeat center right;
+
+			&.last {
+				background: none;
+			}
+		}
+	}
+}
+
+#crumbs {
+	max-height: 30px;
+	overflow: hidden;
+}
+
+
+
+//~~~~~~~~~~~ End All  ~~~~~~~~~~~~~~~~
+
+//~~~~~~~~~~~~ Phone  ~~~~~~~~~~~~~~~~~
+@media @phone { //~~~~~~~~~~~~~~~~~~~~~
+
+	#crumbs-search {
+		margin: 0;
+	}
+
+}//~~~~~~~~~~~ End Phone  ~~~~~~~~~~~~~
+
+//~~~~~~~~~~~~ Tablet  ~~~~~~~~~~~~~~~~
+@media @tablet { //~~~~~~~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Tablet  ~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet-Desktop  ~~~~~~~~
+@media @tablet-desktop { //~~~~~~~~~~~~
+
+	#crumbs-search {
+		margin: 5px 0 0 0;
+	}
+
+}//~~~~~~~~~~~ End Tablet-Desktop  ~~~~
+
+
+
+//~~~~~~~~~~~~ Desktop  ~~~~~~~~~~~~~~~
+@media @desktop { //~~~~~~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Desktop  ~~~~~~~~~~~

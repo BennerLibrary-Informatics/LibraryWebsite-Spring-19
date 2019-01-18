@@ -1,0 +1,576 @@
+/* _template.less */
+//Description
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@import "mixins.less";
+@import "media-controllers.less";
+
+.split {
+	> div {
+		float: left;
+	}
+
+	&.reverse > div {
+		float: right;
+	}
+
+	.right {
+		width: 50%
+	}
+
+	.left {
+		width: 50%
+	}
+
+	&.l10-r90 {
+		> .left { width: 10% }
+		> .right { width: 90% }
+	}
+
+	&.l20-r80 {
+		> .left { width: 20% }
+		> .right { width: 80% }
+	}
+
+	&.l25-r75 {
+		> .left { width: 25% }
+		> .right { width: 75% }
+	}
+
+
+	&.l30-r70 {
+		> .left { width: 30% }
+		> .right { width: 70% }
+	}
+
+	&.l40-r60 {
+		> .left { width: 40% }
+		> .right { width: 60% }
+	}
+
+	&.l45-r45 {
+		> .left { width: 45% }
+		> .right { width: 45% }
+	}
+
+	&.l45-r55 {
+		> .left { width: 45% }
+		> .right { width: 55% }
+	}
+
+	// 50-50 y default
+
+	&.l55-r45 {
+		> .left { width: 55% }
+		> .right { width: 45% }
+	}
+
+	&.l60-r40 {
+		> .left { width: 60% }
+		> .right { width: 40% }
+	}
+
+	&.l70-r30 {
+		> .left { width: 70% }
+		> .right { width: 30% }
+	}
+
+	&.l75-r25 {
+		> .left { width: 75% }
+		> .right { width: 25% }
+	}
+
+	&.l80-r20 {
+		> .left { width: 80% }
+		> .right { width: 20% }
+	}
+
+	&.l90-r10 {
+		> .left { width: 90% }
+		> .right { width: 10% }
+	}
+}
+
+.even-col	 {
+			width: 46%;
+			float:left;
+			padding-left: 20px;
+			padding-right:5px;
+			padding-bottom:10px;
+	}
+
+ul.link-list {
+	list-style: none;
+	margin-left: 10px;
+
+	li {
+		//position: relative;
+		display: block;
+		.border-box;
+		margin: 0;
+		padding: 0;
+
+		&:after {
+			content: '';
+			clear: both;
+			display: table;
+		}
+	}
+
+	li.title {
+		margin-top: 5px;
+		margin-bottom: 5px;
+		font-weight: 700;
+		padding-left: 10px;
+	}
+
+	a {
+		display: block;
+		color: #000;
+		text-decoration: none;
+		padding: 1px 10px;
+		.border-radius(5px);
+
+		&:hover, {
+			background: #666;
+			color: #fff;
+		}
+	}
+
+	img {
+		display: block;
+		color: #000;
+		text-decoration: none;
+		padding: 1px 10px;
+		.border-radius(5px);
+
+	}
+
+	> ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		width: 40%;
+	}
+
+	&.col-3 {
+		> ul {
+			width: 100/3%;
+			float: left;
+		}
+	}
+
+	&.col-2 {
+		> ul {
+			width: 50%;
+			float: left;
+		}
+	}
+}
+
+ul.link-list.highlight {
+		li {
+			display: block;
+			margin: 5px;
+		}
+
+		a {
+			display: block;
+			background: #666;
+			padding: 8px 10px;
+			color: #fff;
+			text-align: center;
+			.border-radius (5px);
+
+			&:hover {
+				background: #444;
+			}
+		}
+	}
+
+ul.link-list.irs {
+	list-style: none;
+	margin-left: 10px;
+
+
+	li {
+		min-height: 24px;
+		font-size: 0;
+
+		&.no-full-text {
+			.db-type-icon {
+				background-image: url('/img/css/no-full-text.png');
+			}
+		}
+
+		&.some-full-text {
+			.db-type-icon {
+				background-image: url('/img/css/some-full-text.png');
+			}
+		}
+
+		&.full-text {
+			.db-type-icon {
+				background-image: url('/img/css/full-text.png');
+			}
+		}
+
+		&.multimedia {
+			.db-type-icon {
+				background-image: url('/img/css/multimedia.png');
+			}
+		}
+
+		&.no-graphic {
+			a {
+				padding-left: 10px;
+			}
+		}
+	}
+
+	.db-type-icon {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 24px;
+		width: 24px;
+		display: block;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	.more-info {
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 24px;
+		width: 24px;
+		display: block;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-image: url('/img/css/small-arrow-down.png');
+		.border-radius(5px);
+
+		&:hover {
+			background-color: #999;
+		}
+	}
+
+	.tut-link {
+		background-image: url('/img/help/tutorial.png');
+		background-repeat: no-repeat;
+		background-position: center;
+		padding-left: 26px;
+		padding-right: 26px;
+	}
+
+	.trial-link {
+		background-image: url('/img/new.png');
+		background-repeat: no-repeat;
+		background-position: center;
+		padding-left: 26px;
+		padding-right: 26px;
+	}
+
+	.new-link {
+		background-image: url('/img/new.png');
+		background-repeat: no-repeat;
+		background-position: center;
+		padding-left: 26px;
+		padding-right: 26px;
+	}
+
+	div {
+		float: left;
+		font-size: 16px;
+		display: none;
+		padding-bottom: 10px;
+		clear: both;
+
+		p {
+			margin-left: 24px;
+			font-size: .9em;
+			margin-top: 10px;
+			margin-bottom: 10px;
+
+			a {
+				font-size: inherit;
+				display: inline;
+				float: none;
+				padding: 0;
+				margin: 0;
+				line-height: inherit;
+				color: #00e;
+
+				&:hover {
+					background-color: transparent;
+					color: #00e;
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+	.open {
+		div {
+			display: block;
+		}
+
+		a {
+			white-space: normal;
+		}
+
+		.more-info {
+			background-image: url('/img/css/small-arrow-up.png');
+		}
+	}
+
+	a {
+		min-height: 24px;
+		float: left;
+		font-size: 16px;
+		padding: 0 30px 0 24px;
+		position: relative;
+		line-height: 24px;
+		display: inline-block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 89%;
+		.border-box;
+	}
+}
+
+.tut-link {
+	background-image: url('/img/help/tutorial.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-left: 26px;
+	padding-right: 26px;
+	height: 20px;
+}
+
+.trial-link {
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-left: 26px;
+	padding-right: 26px;
+	height: 20px;
+
+}
+
+.new-link {
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-left: 26px;
+	padding-right: 26px;
+	height: 20px;
+
+}
+
+
+div.float-box-right, div.float-box-left {
+	width:  200px;
+		&.big {
+			width: 50%;
+		}
+	border: 1px solid #666;
+	padding: 10px;
+	margin: 0px 10px 10px 10px;
+	background: #f5f5f5;
+
+	p, h1, h2, h3, h4 ,h5 ,h6 {
+		margin: 0;
+	}
+
+	hr {
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+}
+
+div.float-box-right {
+	float: right;
+
+}
+div.float-box-left {
+	float: left;
+}
+
+code {
+	background: #aaa;
+	display: block;
+	margin: 10px 10px 10px 20px;
+	padding: 10px;
+	overflow-x: auto;
+}
+
+pre {
+	padding: 0;
+	margin: 0;
+}
+
+div.col-2 {
+	width: 50%;
+	display: inline-block;
+	float: left;
+
+	&:first-child {
+		margin-top: 0;
+	}
+}
+
+a.irs-resource {
+	position: relative;
+
+	.float-description {
+		position: absolute;
+		top: 100%;
+		left: 20px;
+		min-width: 400px;
+		max-height: 600px;
+		display: none;
+		z-index: 100;
+		background-color: #f5f5f5;
+		border: 1px solid #333;
+		color: #000;
+		padding: 5px 10px;
+	}
+
+	&:hover {
+		.float-description {
+			display: block;
+		}
+	}
+}
+
+.continuous-float > div {
+	float: left;
+	width: 180px;
+	text-align: center;
+
+	img {
+		width: 150px;
+		height: auto;
+		margin: 0 auto;
+	}
+
+}
+
+.continuous-inline > div {
+	display: inline-block;
+	width: 175px;
+	text-align: center;
+	vertical-align: top;
+
+	img {
+		width: 200px;
+		height: auto;
+		margin: 0 auto;
+	}
+
+}
+
+.ellison > div, .bbgc > div {
+	padding-bottom: 30px;
+
+	img {
+		width: 150px;
+		height: auto;
+		margin: 0 auto;
+	}
+}
+
+.small-image > div {
+	padding-bottom: 0px;
+	width: 95px;
+
+	img {
+		width: 100px;
+		height: auto;
+		margin: 0 auto;
+	}
+
+}
+//~~~~~~~~~~~ End All  ~~~~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone  ~~~~~~~~~~~~~~~~~
+@media @phone { //~~~~~~~~~~~~~~~~~~~~~
+
+div.float-box-right, div.float-box-left {
+	float: none;
+	width: auto;
+	border: 1px solid #666;
+	padding: 10px;
+	margin: 0px 10px 10px 10px;
+
+	p, h1, h2, h3, h4 ,h5 ,h6 {
+		margin: 0;
+	}
+}
+
+ul.link-list {
+	&.col-3 {
+		> ul {
+			width: auto;
+			float: none;
+		}
+	}
+
+	&.col-2 {
+		> ul {
+			width: auto;
+			float: none;
+		}
+	}
+}
+
+.split {
+	> div {
+		float: none !important;
+	}
+
+
+
+	.right {
+		width: auto !important;
+	}
+
+	.left {
+		width: auto !important;
+	}
+}
+
+
+}//~~~~~~~~~~~ End Phone  ~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone-tablet  ~~~~~~~~~~
+@media @phone-tablet { //~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Phone-tablet  ~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet  ~~~~~~~~~~~~~~~~
+@media @tablet { //~~~~~~~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Tablet  ~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet-Desktop  ~~~~~~~~
+@media @tablet-desktop { //~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Tablet-Desktop  ~~~~
+
+
+
+//~~~~~~~~~~~~ Desktop  ~~~~~~~~~~~~~~~
+@media @desktop { //~~~~~~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Desktop  ~~~~~~~~~~~

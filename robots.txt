@@ -1,0 +1,11 @@
+User-agent: *
+
+Disallow: /favorites/
+Disallow: /localsite/
+Disallow: /forms/
+Disallow: /third-party-services/
+Disallow: /pubserv/
+Disallow: /tools/
+Disallow: /donations/clerico_farley.php
+Disallow: /help/circulation/
+Disallow: /help/informatics/

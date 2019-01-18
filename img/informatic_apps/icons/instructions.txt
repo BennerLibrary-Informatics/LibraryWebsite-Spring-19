@@ -1,0 +1,6 @@
+Open Adobe Illustrator
+Add text box
+Choose Font Awesome as font (download if you don't have it - http://fontawesome.io/)
+Paste icon from cheatsheet page (http://fontawesome.io/cheatsheet/)
+File --> Export --> Export As
+

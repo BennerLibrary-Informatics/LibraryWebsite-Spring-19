@@ -1,0 +1,2 @@
+Please go to http://library.olivet.edu/opensource/dcod_installation.pdf to access the Installation Instructions. 
+Other important information related to DCOD can be located at http://library.olivet.edu/opensource/dcod.php.

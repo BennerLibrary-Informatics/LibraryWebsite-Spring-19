@@ -1,0 +1,17 @@
+@phone: ~"only screen and (max-width: 719px)";
+@phone-tablet: ~"only screen and (max-width: 979px)";
+@tablet: ~"only screen and (min-width: 720px) and (max-width: 979px)";
+@tablet-desktop: ~"only screen and (min-width: 720px)";
+@desktop: ~"only screen and (min-width: 980px)";
+
+@media @phone {
+	.no-phone, .only-desktop, .only-tablet { display: none !important; }
+}
+
+@media @tablet {
+	.no-tablet, .only-phone, .only-desktop { display: none !important; }
+}
+
+@media @desktop {
+	.no-desktop, .only-phone, .only-tablet { display: none !important; }
+}

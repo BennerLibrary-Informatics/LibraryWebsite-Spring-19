@@ -1,0 +1,81 @@
+/* footer.less */
+//Description
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@import "variables.less";
+@import "media-controllers.less";
+
+#footer {
+	font-size: 0.9em;
+	background: @c-purple url("/img/logo.png") no-repeat center;
+	padding: 10px 0;
+
+	ul {
+		list-style: none;
+		margin: 0;
+	}
+
+	li,
+	li a {
+		color: #fff;
+	}
+
+	li a {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+}
+
+.svg #footer {
+	background: @c-purple url("/img/logo.svg") no-repeat center;
+}
+
+//~~~~~~~~~~~ End All  ~~~~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone  ~~~~~~~~~~~~~~~~~
+@media @phone { //~~~~~~~~~~~~~~~~~~~~~
+
+#footer {
+	ul {
+		text-align: center;
+
+	&.right {
+		padding-top: 66px;
+	}
+	}
+
+
+}
+
+}//~~~~~~~~~~~ End Phone  ~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet-Desktop  ~~~~~~~~
+@media @tablet-desktop { //~~~~~~~~~~~~
+
+#footer {
+	ul {
+		width: 50%;
+		display: inline-block;
+		float: left;
+		line-height: 1.2;
+
+		&.right {
+			text-align: right;
+		}
+
+		li {
+			padding: 0 10px;
+		}
+	}
+}
+
+}//~~~~~~~~~~~ End Tablet-Desktop  ~~~~

@@ -1,0 +1,1 @@
+<meta http-equiv="refresh" content="0; URL='http://library.olivet.edu/subject-guides/english/college-writing-ii/'" />

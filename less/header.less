@@ -1,0 +1,107 @@
+/* header.less */
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@import "variables.less";
+@import "media-controllers.less";
+
+.cw2-box {
+	width:30px;
+	background-color:#82AD51;
+	color:white;
+	display: inline-block;
+}
+
+#header {
+	background: @c-purple;
+
+	a {
+		color: #fff;
+		text-decoration: none;
+		display: inline-block;
+	}
+
+	img {
+		float: left;
+		padding-right: 10px;
+	}
+
+	h1,
+	h2 {
+		float: left;
+		padding: 0;
+		margin: 0;
+		border: none;
+	}
+
+	#show-main-nav {
+		background: url("/img/css/show-main-nav.png") no-repeat center;
+		width: 45px;
+		height: 40px;
+		float: right;
+		padding: 0 0 0 0;
+	}
+}
+
+//~~~~~~~~~~~ End All  ~~~~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone  ~~~~~~~~~~~~~~~~~
+@media @phone { //~~~~~~~~~~~~~~~~~~~~~
+
+#header {
+	height: 55px;
+
+	a {
+		padding: 15px 10px;
+	}
+
+	img {
+		height: 25px;
+		width: auto;
+	}
+
+	h1 {
+		font-size: 25px;
+		line-height: 1;
+	}
+
+	#show-main-nav {
+		margin: 7px 0;
+	}
+}
+
+}//~~~~~~~~~~~ End Phone  ~~~~~~~~~~~~~
+
+
+//~~~~~~~~~~~~ Tablet-Desktop  ~~~~~~~~
+@media @tablet-desktop { //~~~~~~~~~~~~
+
+#header{
+	height:85px;
+
+	a {
+		height: 47px;
+		width: 300px;
+		padding: 18px 10px;
+		line-height: 1;
+	}
+
+	h1 {
+		font-size: 26px;
+		line-height: 1;
+	}
+
+	h2 {
+		padding-top: 6px;
+		font-size: 15px;
+		line-height: 1;
+	}
+
+	#show-main-nav {
+		margin: 20px 0;
+	}
+}
+
+}//~~~~~~~~~~~ End Tablet-Desktop  ~~~~

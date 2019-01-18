@@ -1,0 +1,306 @@
+/* forms.less */
+//user input form styling
+@import "mixins.less";
+@import "helper-classes.less";
+@import "media-controllers.less";
+
+form.float-label {
+}
+
+.field-wrapper {
+	padding: 0 20px 15px 20px;
+
+	> label {
+		font-size: 12px;
+		font-weight: 600;
+		text-transform: uppercase;
+		padding: 0 0 0 5px;
+		margin: 0;
+		line-height: 1;
+	}
+
+	p {
+		padding: 3px 5px;
+		margin: 0;
+		font-size: 14px;
+	}
+
+	input[type=text], textarea, select {
+		padding: 2px 5px;
+		.border-box;
+		border: 1px solid #666;
+	}
+
+	textarea {
+		margin-right: 20px;
+	}
+
+	.LV_validation_message.LV_valid {
+		display: none;
+	}
+
+	.LV_validation_message.LV_invalid {
+		font-size: 14px;
+		padding: 0 0 0 5px;
+	}
+
+	.LV_invalid_field {
+		background-color: @l-red;
+		&::-webkit-input-placeholder {
+		   color: #666;
+		}
+
+		&:-moz-placeholder { /* Firefox 18- */
+		   color: #666;
+		}
+
+		&::-moz-placeholder {  /* Firefox 19+ */
+		   color: #666;
+		}
+
+		&:-ms-input-placeholder {
+		   color: #666;
+		}
+	}
+}
+
+.radio-wrapper {
+	label {
+		display: inline-block;
+		width: auto;
+		padding: 0;
+		margin: 0;
+	}
+	input {
+		display: inline-block;
+		width: auto;
+	}
+}
+
+.set-wrapper {
+	&:extend(.cf all);
+
+	.field-wrapper {
+		float: left;
+		width: 25%;
+		.border-box;
+	}
+
+	.LV_validation_message {
+		display: block;
+		width: 100%;
+	}
+
+	input[type=text] {
+	}
+
+}
+
+@media @phone {
+	input, select {
+		font-size: 16px !important;
+	}
+
+	.set-wrapper {
+		.field-wrapper {
+			float: none;
+			width: 100%;
+			.border-box;
+		}
+	}
+
+	input[type=text] {
+		width: 100%;
+	}
+}
+
+.form-wrapper {
+  padding: 0 20px 15px 0px;
+  margin-left: 20px;
+  width: 57%;
+}
+.form-wrapper > label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0 0 0 5px;
+  margin: 0;
+  line-height: 1;
+}
+.form-wrapper p {
+  padding: 3px 5px;
+  margin: 0;
+  font-size: 14px;
+}
+.form-wrapper input[type=text],
+.form-wrapper textarea,
+.form-wrapper select {
+  padding: 2px 5px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #666;
+}
+.form-wrapper textarea {
+  margin-right: 20px;
+}
+.form-wrapper .LV_validation_message.LV_valid {
+  display: none;
+}
+.form-wrapper .LV_validation_message.LV_invalid {
+  font-size: 14px;
+  padding: 0 0 0 5px;
+}
+.form-wrapper .LV_invalid_field {
+  background-color: #f8a0a2;
+}
+.form-wrapper .LV_invalid_field::-webkit-input-placeholder {
+  color: #666;
+}
+.form-wrapper .LV_invalid_field:-moz-placeholder {
+  /* Firefox 18- */
+  color: #666;
+}
+.form-wrapper .LV_invalid_field::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #666;
+}
+.form-wrapper .LV_invalid_field:-ms-input-placeholder {
+  color: #666;
+}
+.radio-wrapper label {
+  display: inline-block;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+.radio-wrapper input {
+  display: inline-block;
+  width: auto;
+}
+.set-wrapper .form-wrapper {
+  float: left;
+  width: 60%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.set-wrapper .LV_validation_message {
+  display: block;
+  width: 100%;
+}
+@media only screen and (max-width: 719px) {
+  input,
+  select {
+    font-size: 16px !important;
+  }
+  .set-wrapper .form-wrapper {
+    float: none;
+    width: 60%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+label {
+	display: block;
+	width: 100%;
+	.border-box;
+	padding: 0 20px;
+	margin: 5px 0 10px 5px;
+}
+
+label > p {
+	margin: 0;
+	padding: 0;
+	font-size: .8em;
+}
+
+label > span {
+	display: inline-block;
+	min-width: 25%;
+}
+
+label.required span:after {
+	content: '*';
+	color: #EA3C53;
+}
+
+label input[type=text]{
+	width: 30%;
+	.border-box;
+	padding: 0 5px;
+}
+
+textarea {
+	width: 100%;
+	.border-box;
+	margin: 5px 0;
+}
+
+input[type=submit], input[type=reset] {
+	.border-box;
+	margin: 5px 5px 5px 0;
+	width: auto;
+}
+
+//~~~~~~~~~~~ End All  ~~~~~~~~~~~~~~~~
+
+//~~~~~~~~~~~~ Phone  ~~~~~~~~~~~~~~~~~
+@media @phone { //~~~~~~~~~~~~~~~~~~~~~
+
+label > span {
+	display: block;
+	width: 100%;
+}
+
+label input[type=text] {
+	width: 100%;
+	.border-box;
+	display: block;
+	font-size: 16px;
+}
+
+
+}//~~~~~~~~~~~ End Phone  ~~~~~~~~~~~~~

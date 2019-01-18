@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/informatics_devtrack/!svn/ver/23/devTracker/phpmailer
+END
+class.phpmailer.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/informatics_devtrack/!svn/ver/23/devTracker/phpmailer/class.phpmailer.php
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/informatics_devtrack/!svn/ver/23/devTracker/phpmailer/LICENSE
+END
+class.pop3.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/informatics_devtrack/!svn/ver/23/devTracker/phpmailer/class.pop3.php
+END
+changelog.txt
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/informatics_devtrack/!svn/ver/23/devTracker/phpmailer/changelog.txt
+END
+class.smtp.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/informatics_devtrack/!svn/ver/23/devTracker/phpmailer/class.smtp.php
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/informatics_devtrack/!svn/ver/23/devTracker/phpmailer/README
+END

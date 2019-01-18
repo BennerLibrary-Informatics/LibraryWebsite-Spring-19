@@ -1,0 +1,229 @@
+/* _template.less */
+//Description
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@import "mixins.less";
+@import "variables.less";
+@import "media-controllers.less";
+
+.animate(@string: ~"left 500ms ease") {
+    -webkit-transition: @string;
+    -moz-transition: @string;
+    -o-transition: @string;
+    transition: @string;
+}
+
+#bulletins {
+}
+#calendar {
+  width: 100%;
+  position: relative;
+  padding: 0 10px;
+
+  p, h1 {
+    line-height: 1.1;
+    width: 220px;
+    margin: 0;
+    padding-bottom: 5px;
+    float: right;
+    font-size: 14px;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+}
+#window {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+#reel {
+	width: 7000px;
+	position: relative;
+}
+
+.loaded .bulletin {
+	transition: all 0.5s;
+}
+
+.bulletin {
+	overflow: hidden;
+	width: 220px;
+	min-height: 260px;
+	float: left;
+	padding: 0 10px;
+
+	p, h1 {
+		line-height: 1.1;
+		width: 220px;
+		margin: 0;
+		padding-bottom: 5px;
+		float: right;
+		font-size: 14px;
+	}
+	h2 {
+		margin: 0 0 10px 0;
+		width: 220px;
+		height: 130px;
+		.border-box;
+		background: #456756;
+		display: block;
+		border: none;
+		font-family: @f-body;
+		float: right;
+		line-height: 1;
+
+		a {
+			padding: 30px 10px 10px 10px;
+			color: #fff;
+			display: block;
+			height: 100%;
+			width: 100%;
+			.border-box;
+		}
+
+		a:hover {
+			text-decoration: none;
+		}
+	}
+
+	> h3, > h4, > h5, > h6, > a, > iframe {
+		.border-box;
+		width: 220px;
+		float: right;
+		margin: 0;
+	}
+
+	img {
+		float: right;
+		margin-bottom: 10px;
+		width: 220px;
+		min-width: 220px;
+	}
+	&:first-of-type, &:nth-of-type(2) {
+		width: 0;
+		padding: 0;
+	}
+
+}
+
+.bulletin .img-ignore {
+
+	img {
+		float: right;
+		margin-bottom: 10px;
+		width: 14px;
+		min-width: 14px;
+	}
+}
+
+
+.no-js{
+
+	.bulletin {
+		&:first-of-type, &:nth-of-type(2) {
+			width: 220px;
+			padding: 0 10px;
+		}
+	}
+	.arrow {
+		display: none;
+	}
+}
+
+.arrow {
+	.transition(@string: ~"background 250ms ease");
+	cursor: pointer;
+	z-index: 10;
+	position: absolute;
+	top: 32%;
+	height: 36%;
+	width: 30px;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	&.left {
+		left: 10px;
+	}
+
+	&.right {
+		right: 10px;
+	}
+}
+
+
+
+//~~~~~~~~~~~ End All  ~~~~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone  ~~~~~~~~~~~~~~~~~
+@media @phone { //~~~~~~~~~~~~~~~~~~~~~
+.arrow {
+
+	&.left {
+		left: 0;
+	}
+
+	&.right {
+		right: 0;
+		background-color: #333;
+		background-color: rgba(1, 1, 1, 0.8);
+		width: 45px;
+		background-image: url('/img/css/tall-arrow-right.png');
+
+	}
+}
+}//~~~~~~~~~~~ End Phone  ~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone-tablet  ~~~~~~~~~~
+@media @phone-tablet { //~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Phone-tablet  ~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet  ~~~~~~~~~~~~~~~~
+@media @tablet { //~~~~~~~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Tablet  ~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet-Desktop  ~~~~~~~~
+@media @tablet-desktop { //~~~~~~~~~~~~
+.arrow {
+	&.right {
+			&.hover, &:hover {
+			background-image: url('/img/css/tall-arrow-right.png');
+		}
+	}
+
+	&.hover, &:hover {
+		background-image: url('/img/css/tall-arrow-left.png');
+	}
+
+	&.hover {
+		background-color: #999;
+		background-color: rgba(1, 1, 1, 0.3);
+	}
+
+	&:hover {
+		background-color: #333;
+		background-color: rgba(1, 1, 1, 0.8);
+	}
+}
+
+}//~~~~~~~~~~~ End Tablet-Desktop  ~~~~
+
+
+
+//~~~~~~~~~~~~ Desktop  ~~~~~~~~~~~~~~~
+@media @desktop { //~~~~~~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Desktop  ~~~~~~~~~~~

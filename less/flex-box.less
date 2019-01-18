@@ -1,0 +1,209 @@
+/* flex-box.less */
+//Description
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@import "media-controllers.less";
+
+.wide-box {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		align-items: flex-end;
+		justify-content: center;
+
+
+	div {
+		width: 45%;
+		flex-direction: row;
+		padding: 10px;
+		margin: 5px;
+		text-align: center;
+		color: white;
+
+			p {
+				color: black;
+				}
+	}
+}
+
+
+.full-width-box {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		align-items: flex-end;
+		justify-content: center;
+
+
+	div {
+		width: 95%;
+		flex-direction: row;
+		padding: 10px;
+		margin: 5px;
+		text-align: center;
+		color: white;
+
+			p {
+				color: black;
+				}
+
+			img {
+				margin-right: 15px;
+			}
+	}
+}
+
+.full-width-right {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		align-items: flex-end;
+		justify-content: center;
+
+
+	div {
+		width: 95%;
+		flex-direction: row;
+		padding: 10px;
+		margin: 15px;
+		text-align: center;
+		color: white;
+	}
+
+	img {
+		width: 300px;
+		margin: 0px 15px 5px 0px;
+	}
+}
+
+.three-col-box {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: flex-end;
+	justify-content: center;
+
+
+	div {
+		width: 29%;
+		flex-direction: row;
+		padding: 10px;
+		margin: 5px;
+		text-align: center;
+		color: white;
+
+			p {
+				color: black;
+				}
+	}
+}
+
+.thumbnail-menu {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+			align-items: flex-end;
+			justify-content: center;
+
+		div {
+			width: 140px;
+			flex-direction: row;
+			padding: 10px;
+			border: 1.5px solid black;
+			margin: 1px;
+			color: black;
+			text-align: center;
+
+			a {
+				text-align: center;
+				word-wrap: break-word;
+				text-decoration: none;
+				color: inherit;
+
+				img {
+					width: 100%;
+				}
+			}
+		}
+
+}
+
+.image-display {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+			align-items: flex-end;
+			justify-content: flex-start;
+
+			img {
+				height: 200px;
+				margin: 15px;
+			}
+}
+
+//this is for the informatics apps displays at 50x50 like it will on our apps
+.image-display-50 {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+			align-items: flex-end;
+			justify-content: flex-start;
+
+			img {
+				height: 50px;
+				margin: 15px;
+			}
+}
+
+//this is for the informatics apps displays at 50x50 like it will on our apps
+.image-display-100 {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+			align-items: flex-end;
+			justify-content: flex-start;
+
+			img {
+				width: 100px;
+				margin: 15px;
+			}
+}
+
+//~~~~~~~~~~~ End All  ~~~~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone  ~~~~~~~~~~~~~~~~~
+@media @phone { //~~~~~~~~~~~~~~~~~~~~~
+
+
+}//~~~~~~~~~~~ End Phone  ~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone-tablet  ~~~~~~~~~~
+@media @phone-tablet { //~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Phone-tablet  ~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet  ~~~~~~~~~~~~~~~~
+@media @tablet { //~~~~~~~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Tablet  ~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet-Desktop  ~~~~~~~~
+@media @tablet-desktop { //~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Tablet-Desktop  ~~~~
+
+
+
+//~~~~~~~~~~~~ Desktop  ~~~~~~~~~~~~~~~
+@media @desktop { //~~~~~~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Desktop  ~~~~~~~~~~~

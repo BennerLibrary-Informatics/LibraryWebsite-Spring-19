@@ -1,0 +1,317 @@
+/* _template.less */
+//Description
+
+//~~~~~~~~~~~~ All ~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@import "variables.less";
+@import "helper-classes.less";
+@import "mixins.less";
+@import "media-controllers.less";
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: @f-title;
+	margin: 10px 15px;
+	line-height: 1.15;
+	font-weight: 400;
+}
+
+h1 {
+	margin-top: 0;
+	margin-bottom: 20px;
+	border-bottom: 4px solid #000;
+	padding-bottom: 5px;
+}
+
+h1.no-header-line {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: none;
+	padding-bottom: 0px;
+}
+
+.header-line {
+	margin-top: 0;
+	margin-bottom: 20px;
+	border-bottom: 4px solid #000;
+	padding-bottom: 5px;
+}
+
+h2, h3 {
+	margin-top: 20px;
+}
+
+p, ul, ol {
+	margin: 10px 20px;
+}
+
+p + ul {
+	margin-left: 45px;
+}
+
+p + p {
+	margin-top: 15px;
+}
+
+// h1, h2, h3, h4, h5, h6, p, ul{
+// 	margin: 5px 10px;
+// 	padding: 0;
+// 	display: block;
+
+// }
+
+// h1 {
+// 	padding: 0 0 5px 0;
+// 	border-bottom: 4px solid #000;
+// 	line-height: 1;
+// 	margin-bottom: 20px;
+// 	margin-top: 0;
+// }
+
+// h2, h3 {
+// 	margin-top: 30px;
+// }
+
+// h4 {
+// 	margin-top: 25px;
+// }
+
+// h2 {
+// 	border-bottom: 2px solid #000;
+// 	margin-bottom: 7px;
+// }
+
+// h5, h6 {
+// 	margin-top: 20px;
+// 	font-family: @f-body;
+// }
+
+// h5 {
+// 	margin-top: 10px;
+// 	font-weight: 700;
+// 	padding-left: 10px;
+// }
+
+// h6 {
+// 	margin-top: 10px;
+// 	color: #666;
+// 	padding-left: 10px;
+// 	font-style: italic;
+// }
+
+// p {
+// 	padding-left: 10px;
+// }
+
+// p + p {
+// 	margin-top: 10px;
+// }
+
+// hr {
+// 	margin:  30px 10px;
+// 	height: 1px;
+// 	background: #000;
+// 	border: none;
+// }
+
+// hr {
+// 	margin:  30px 10px 30px 10px;
+// 	height: 1px;
+// 	background: #000;
+// 	border: none;
+// }
+
+ul, ol {
+	list-style-position: outside;
+	margin-left: 30px;
+	margin-right: 10px;
+	margin-bottom: 15px
+}
+
+// p + ul, p + ol {
+// 	margin-left: 40px;
+// }
+
+a:link {
+	text-decoration: none;
+}
+a:visited {
+}
+a:hover {
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+ 	border-spacing: 0;
+	margin: 10px;
+}
+
+.table-wrapper {
+	margin: 10px;
+	table {
+		width: 100%;
+		margin: 0;
+	}
+}
+
+tr {
+	margin: 2px 0;
+}
+
+thead {
+	.bold;
+}
+
+.readable tr:nth-child(odd) {
+	background: #ccc;
+}
+
+.readable-light-red tr:nth-child(odd) {
+	background: @l-red;
+}
+
+.border-tr {
+	border: 1px #000 solid;
+
+	tr {
+		border-bottom: 1px solid #000;
+		&:last-of-type {
+			border: none;
+		}
+	}
+
+	thead {
+		border-bottom: 1px solid #000;
+	}
+}
+
+td {
+	margin: 0;
+	padding: 2px 5px;
+	//vertical-align: top;
+}
+
+// .no-margin-top {
+// 	margin-top: 0;
+// }
+
+//~~~~~~~~~~~ End All  ~~~~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone  ~~~~~~~~~~~~~~~~~
+@media @phone { //~~~~~~~~~~~~~~~~~~~~~
+
+h1 {
+	font-size: @f-size-p*2.2;
+}
+
+h2 {
+	font-size: floor(@f-size-p*1.8);
+}
+
+h3 {
+	font-size: floor(@f-size-p*1.55);
+}
+
+h4 {
+	font-size: floor(@f-size-p*1.35)
+}
+
+h5 {
+	font-size: floor(@f-size-p*1.15)
+}
+
+h6 {
+	font-size: @f-size-p;
+}
+
+p {
+	font-size: @f-size-p;
+}
+
+}//~~~~~~~~~~~ End Phone  ~~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Phone-tablet  ~~~~~~~~~~
+@media @phone-tablet { //~~~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Phone-tablet  ~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet  ~~~~~~~~~~~~~~~~
+@media @tablet { //~~~~~~~~~~~~~~~~~~~~
+
+h1 {
+	font-size: @f-size-t*2.2;
+}
+
+h2 {
+	font-size: floor(@f-size-t*1.8);
+}
+
+h3 {
+	font-size: floor(@f-size-t*1.55);
+}
+
+h4 {
+	font-size: floor(@f-size-t*1.35)
+}
+
+h5 {
+	font-size: floor(@f-size-t*1.15)
+}
+
+h6 {
+	font-size: @f-size-t;
+}
+
+p {
+	font-size: @f-size-t;
+}
+
+}//~~~~~~~~~~~ End Tablet  ~~~~~~~~~~~~
+
+
+
+//~~~~~~~~~~~~ Tablet-Desktop  ~~~~~~~~
+@media @tablet-desktop { //~~~~~~~~~~~~
+
+}//~~~~~~~~~~~ End Tablet-Desktop  ~~~~
+
+
+
+//~~~~~~~~~~~~ Desktop  ~~~~~~~~~~~~~~~
+@media @desktop { //~~~~~~~~~~~~~~~~~~~
+
+h1 {
+	font-size: @f-size*2.2;
+}
+
+h2 {
+	font-size: floor(@f-size*1.8);
+}
+
+h3 {
+	font-size: floor(@f-size*1.55);
+}
+
+h4 {
+	font-size: floor(@f-size*1.35)
+}
+
+h5 {
+	font-size: floor(@f-size*1.15)
+}
+
+h6 {
+	font-size: @f-size;
+}
+
+p {
+	font-size: @f-size;
+}
+
+}//~~~~~~~~~~~ End Desktop  ~~~~~~~~~~~
