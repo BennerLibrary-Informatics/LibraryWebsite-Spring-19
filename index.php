@@ -104,7 +104,7 @@
 				<div class="arrow right hover"  style="width: 30px;"></div>
 				<div id="reel">
 					<div class="bulletin">
-						<img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/promote_charging_station.png" alt="Charging Stationn" title="promote_charging_station.png">
+						<img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/promote_charging_station.png" alt="Charging Station" title="promote_charging_station.png">
 					</div>
 					<div class="bulletin">
 						<img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/promote_archives_full.png" alt="University Archives" title="promote_archives_full.png">
