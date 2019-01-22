@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/databaseConnection.php'; ?>
+
 <?php include_once($_SERVER['DOCUMENT_ROOT']."/scripts/crumbs.php"); ?>
 
 <html class="no-js" name="top_page" id="top_page">

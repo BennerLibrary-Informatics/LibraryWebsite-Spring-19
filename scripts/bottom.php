@@ -1,4 +1,4 @@
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/databaseConnection.php'; ?>
+
 
 				<div class="cf"></div>
 				<?php
