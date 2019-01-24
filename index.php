@@ -101,7 +101,7 @@
 		<div id="bulletins">
 			<div id="window">
 				<div class="arrow left" style="width: 30px;"></div>
-				<div class="arrow right hover"  style="width: 30px;"></div>
+				<div class="arrow right hover"  style="width: 20px;"></div>
 				<div id="reel">
 					<div class="bulletin">
 						<img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/promote_charging_station.png" alt="Charging Station" title="promote_charging_station.png">
