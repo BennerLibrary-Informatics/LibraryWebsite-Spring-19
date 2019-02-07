@@ -25,7 +25,9 @@
   //$img = array('img_2392.jpg', 'img_2400.jpg', 'img_2412.jpg', 'chess-cut.jpg', "books.png" ); // array of filenames
   //$i = rand(0, count($img)-1); // generate random number size of the array
   //$selHomeHeroImg = "$img[$i]"; // set variable equal to which random filename was chosen
-	require __DIR__ . '/vendor/autoload.php';
+	if(file_exists('./vendor/autoload.php')) {
+		require_once('./vendor/autoload.php');
+	}
 
 	function getClient()
 	{
@@ -76,6 +78,7 @@
 	    return $client;
 	}
 
+	if(file_exists('credentials.json')) {
 	// Get the API client and construct the service object.
 	$client = getClient();
 	$service = new Google_Service_Calendar($client);
@@ -103,6 +106,7 @@
 	        printf("%s (%s)\n", $event->getSummary(), $start);
 	    }
 	}
+}
 
 ?>
 
@@ -178,7 +182,7 @@
 		<div id="bulletins">
 			<div id="window">
 				<div class="arrow left" style="width: 30px;"></div>
-				<div class="arrow right hover"  style="width: 20px;"></div>
+				<div class="arrow right hover"  style="width: 30px;"></div>
 				<div id="reel">
 					<div class="bulletin">
 						<img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/promote_charging_station.png" alt="Charging Station" title="promote_charging_station.png">
