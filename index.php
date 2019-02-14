@@ -86,7 +86,7 @@
 	// Print the next 10 events on the user's calendar.
 	$calendarId = '72ts5jjncg48q761l4bsl9589g@group.calendar.google.com';
 	$optParams = array(
-	  'maxResults' => 10,
+	  'maxResults' => 2,
 	  'orderBy' => 'startTime',
 	  'singleEvents' => true,
 	  'timeMin' => date('c'),
@@ -100,10 +100,14 @@
 	    print "Upcoming events:\n";
 	    foreach ($events as $event) {
 	        $start = $event->start->dateTime;
+					$end = $event->end->dateTime;
+					$testStart = new DateTime($start);
+					$testEnd = new DateTime($end);
+
 	        if (empty($start)) {
 	            $start = $event->start->date;
 	        }
-	        printf("%s (%s)\n", $event->getSummary(), $start);
+	        printf("%s (%s)\n", $event->getSummary(), "{$testStart->format('Y-m-d h:iA')}-{$testEnd->format('h:iA')}");
 	    }
 	}
 }
@@ -175,7 +179,20 @@
 
 <div class="split l25-r75 cf">
    <div class="left">
-		 <p>hello the library is currently open</P>
+		 <?php
+		 		$firstItemStart = new DateTime($events[0]->start->dateTime);
+				$firstItemEnd = new DateTime($events[0]->end->dateTime);
+				$currentDate = Date('Y-m-d');
+				$firstItemEnd = $firstItemEnd->format('h:iA');
+				var_dump($firstItemStart->format('Y-m-d'));
+				var_dump(Date('Y-m-d H:i'));
+				if ($firstItemStart->format('Y-m-d') == $currentDate) {
+					echo "<p>hello the library is currently open until $firstItemEnd</p>";
+				} else {
+					print("<p>Library is closed</p>");
+				}
+		  ?>
+
 	</div>
 
 	<div class="right">
