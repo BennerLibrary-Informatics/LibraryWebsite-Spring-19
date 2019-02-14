@@ -2,3 +2,6 @@
 *.db
 /journals-articles/eresources_a-z_static.php
 .DS_Store
+credentials.json
+token.json
+/vendor/
