@@ -178,7 +178,7 @@
 <!-- end #home-hero --></div>
 
 <div class="split l25-r75 cf">
-   <div class="left">
+   <div class="left" style="background-color:grey">
 		 <?php
 		 		$firstItemStart = new DateTime($events[0]->start->dateTime);
 				$firstItemEnd = new DateTime($events[0]->end->dateTime);
