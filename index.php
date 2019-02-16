@@ -78,40 +78,25 @@
 	    return $client;
 	}
 
-	if(file_exists('credentials.json')) {
-	// Get the API client and construct the service object.
-	$client = getClient();
-	$service = new Google_Service_Calendar($client);
+	function getEvents($numEvents = 2) {
+		if(file_exists('credentials.json')) {
+			// Get the API client and construct the service object.
+			$client = getClient();
+			$service = new Google_Service_Calendar($client);
 
-	// Print the next 10 events on the user's calendar.
-	$calendarId = '72ts5jjncg48q761l4bsl9589g@group.calendar.google.com';
-	$optParams = array(
-	  'maxResults' => 2,
-	  'orderBy' => 'startTime',
-	  'singleEvents' => true,
-	  'timeMin' => date('c'),
-	);
-	$results = $service->events->listEvents($calendarId, $optParams);
-	$events = $results->getItems();
-
-	if (empty($events)) {
-	    print "No upcoming events found.\n";
-	} else {
-	    print "Upcoming events:\n";
-	    foreach ($events as $event) {
-	        $start = $event->start->dateTime;
-					$end = $event->end->dateTime;
-					$testStart = new DateTime($start);
-					$testEnd = new DateTime($end);
-
-	        if (empty($start)) {
-	            $start = $event->start->date;
-	        }
-	        printf("%s (%s)\n", $event->getSummary(), "{$testStart->format('Y-m-d h:iA')}-{$testEnd->format('h:iA')}");
-	    }
-	}
-}
-
+			// Print the next 10 events on the user's calendar.
+			$calendarId = '72ts5jjncg48q761l4bsl9589g@group.calendar.google.com';
+			$optParams = array(
+				'maxResults' => $numEvents,
+				'orderBy' => 'startTime',
+				'singleEvents' => true,
+				'timeMin' => date('c'),//Uses server date as minimum
+			);
+			$results = $service->events->listEvents($calendarId, $optParams);
+			$events = $results->getItems();
+			return $events;
+		}
+	} 
 ?>
 
 <!-- if would like to go back to static picture comment out style portion below and modify home-hero.less file -->
@@ -180,17 +165,24 @@
 <div class="split l25-r75 cf">
    <div class="left" style="background-color:grey">
 		 <?php
-		 		$firstItemStart = new DateTime($events[0]->start->dateTime);
-				$firstItemEnd = new DateTime($events[0]->end->dateTime);
-				$currentDate = Date('Y-m-d');
-				$firstItemEnd = $firstItemEnd->format('h:iA');
-				var_dump($firstItemStart->format('Y-m-d'));
-				var_dump(Date('Y-m-d H:i'));
-				if ($firstItemStart->format('Y-m-d') == $currentDate) {
-					echo "<p>hello the library is currently open until $firstItemEnd</p>";
-				} else {
-					print("<p>Library is closed</p>");
-				}
+				$events = getEvents();
+				$cDateTime = date('c');
+				
+				//Test cases
+				//The library is not open, but will be today - Closed sign. "Library will open "
+				//The library is open
+				//The library is not open, and will not be for at least a day
+				//The library is closed for a special even
+
+				//2019-02-16T10:11:02+00:00
+				echo $cDateTime;
+				
+
+				//Print time and UTC designation
+				$cReadableTime = date('g:ia (T)');
+				echo "<p>It is currently $cReadableTime</p>";
+
+
 		  ?>
 
 	</div>
