@@ -110,8 +110,10 @@
             case 22:
                 $subject = "Report an issue on Checkout Management";
                 break;
-
-
+            case 23:
+                $subject = "Open Room assistance"
+            case 24:
+                $subject = "Report an issue on Open Room"
         }
     } else
         $subject = "";
