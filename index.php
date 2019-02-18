@@ -182,14 +182,18 @@
 		 <?php
 		 		$firstItemStart = new DateTime($events[0]->start->dateTime);
 				$firstItemEnd = new DateTime($events[0]->end->dateTime);
+
+				$secondItemStart = new DateTime($events[1]->start->dateTime);
+				$secondItemStart = $secondItemStart->format('M d h:iA');
+
 				$currentDate = Date('Y-m-d');
 				$firstItemEnd = $firstItemEnd->format('h:iA');
-				var_dump($firstItemStart->format('Y-m-d'));
+				var_dump($firstItemStart->format('Y-m-d H:i'));
 				var_dump(Date('Y-m-d H:i'));
-				if ($firstItemStart->format('Y-m-d') == $currentDate) {
-					echo "<p>hello the library is currently open until $firstItemEnd</p>";
+				if ($firstItemStart->format('Y-m-d') == $currentDate && strtotime($firstItemStart->format('H:i')) < time()) {
+					echo "<p>Hello, the library is currently open today until $firstItemEnd</p>";
 				} else {
-					print("<p>Library is closed</p>");
+					print("<p>Library is closed until $secondItemStart</p>");
 				}
 		  ?>
 
