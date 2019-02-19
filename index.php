@@ -25,6 +25,79 @@
   //$img = array('img_2392.jpg', 'img_2400.jpg', 'img_2412.jpg', 'chess-cut.jpg', "books.png" ); // array of filenames
   //$i = rand(0, count($img)-1); // generate random number size of the array
   //$selHomeHeroImg = "$img[$i]"; // set variable equal to which random filename was chosen
+	if(file_exists('./vendor/autoload.php')) {
+		require_once('./vendor/autoload.php');
+	}
+
+	//Retrieves google calendar client
+	function getClient()
+	{
+	    $client = new Google_Client();
+	    $client->setApplicationName('Benner Library');
+	    $client->setScopes(Google_Service_Calendar::CALENDAR_READONLY);
+	    $client->setAuthConfig('credentials.json');
+	    $client->setAccessType('offline');
+	    $client->setPrompt('select_account consent');
+
+	    // Load previously authorized token from a file, if it exists.
+	    // The file token.json stores the user's access and refresh tokens, and is
+	    // created automatically when the authorization flow completes for the first
+	    // time.
+	    $tokenPath = 'token.json';
+	    if (file_exists($tokenPath)) {
+	        $accessToken = json_decode(file_get_contents($tokenPath), true);
+	        $client->setAccessToken($accessToken);
+	    }
+
+	    // If there is no previous token or it's expired.
+	    if ($client->isAccessTokenExpired()) {
+	        // Refresh the token if possible, else fetch a new one.
+	        if ($client->getRefreshToken()) {
+	            $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+	        } else {
+	            // Request authorization from the user.
+	            $authUrl = $client->createAuthUrl();
+	            printf("Open the following link in your browser:\n%s\n", $authUrl);
+	            print 'Enter verification code: ';
+	            $authCode = trim(fgets(STDIN));
+
+	            // Exchange authorization code for an access token.
+	            $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
+	            $client->setAccessToken($accessToken);
+
+	            // Check to see if there was an error.
+	            if (array_key_exists('error', $accessToken)) {
+	                throw new Exception(join(', ', $accessToken));
+	            }
+	        }
+	        // Save the token to a file.
+	        if (!file_exists(dirname($tokenPath))) {
+	            mkdir(dirname($tokenPath), 0700, true);
+	        }
+	        file_put_contents($tokenPath, json_encode($client->getAccessToken()));
+	    }
+	    return $client;
+	}
+
+	function getEvents($numEvents = 2) {
+		if(file_exists('credentials.json')) {
+			// Get the API client and construct the service object.
+			$client = getClient();
+			$service = new Google_Service_Calendar($client);
+
+			// Print the next 10 events on the user's calendar.
+			$calendarId = '72ts5jjncg48q761l4bsl9589g@group.calendar.google.com';
+			$optParams = array(
+				'maxResults' => $numEvents,
+				'orderBy' => 'startTime',
+				'singleEvents' => true,
+				'timeMin' => date('c'),//Uses server date as minimum
+			);
+			$results = $service->events->listEvents($calendarId, $optParams);
+			$events = $results->getItems();
+			return $events;
+		}
+	} 
 ?>
 
 <!-- if would like to go back to static picture comment out style portion below and modify home-hero.less file -->
@@ -91,10 +164,31 @@
 <!-- end #home-hero --></div>
 
 <div class="split l25-r75 cf">
-   <div class="left">
-		 		<div id="calendar">
-					<iframe src="https://www.google.com/calendar/embed?title=Benner%20Hours%20%26%20Events&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTz=0&amp;mode=AGENDA&amp;height=240&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=72ts5jjncg48q761l4bsl9589g%40group.calendar.google.com&amp;color=%236B3304&amp;ctz=America%2FChicago" style=" border-width:0 " width="220" height="240" frameborder="0" scrolling="no"></iframe>
-		 		</div>
+   <div class="left" style="background-color:grey">
+		 <?php
+				$events = getEvents();
+				$cDateTime = date('c');
+				
+				//Test cases
+				//The library is not open, but will be today - Closed sign. "Library will open"
+				//The library is closed for the day
+				//The library is open
+				//The library is not open, and will not be for at least a day
+				//The library is closed for a special event
+				//2019-02-16T10:11:02+00:00
+
+				
+
+				echo $cDateTime;
+				
+
+				//Print time and UTC designation
+				$cReadableTime = date('g:ia (T)');
+				echo "<p>It is currently $cReadableTime</p>";
+
+
+		  ?>
+
 	</div>
 
 	<div class="right">
