@@ -29,6 +29,7 @@
 		require_once('./vendor/autoload.php');
 	}
 
+	//Retrieves google calendar client
 	function getClient()
 	{
 	    $client = new Google_Client();
@@ -169,12 +170,15 @@
 				$cDateTime = date('c');
 				
 				//Test cases
-				//The library is not open, but will be today - Closed sign. "Library will open "
+				//The library is not open, but will be today - Closed sign. "Library will open"
+				//The library is closed for the day
 				//The library is open
 				//The library is not open, and will not be for at least a day
-				//The library is closed for a special even
-
+				//The library is closed for a special event
 				//2019-02-16T10:11:02+00:00
+
+				
+
 				echo $cDateTime;
 				
 
