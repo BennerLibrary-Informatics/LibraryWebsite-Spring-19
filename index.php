@@ -166,7 +166,15 @@
 <!-- end #home-hero --></div>
 
 <div class="split l25-r75 cf">
-   <div class="left" style="background-color:grey">
+   <div class="left no-margin-top" >
+		 <div class="margin10-left" style="background-color:#6D6D6D">
+			 <div style="text-align: center">
+			 	<img src="/about/calendar/img/closed_purple.png" alt="closed_purple.png">
+			 </div>
+			 <div style="text-align: center">
+			  <img src="/about/calendar/img/open_purple.png" alt="open_purple.png">
+			 </div>
+
 		 <?php
 				//If given datetime falls within the event, returns 0
 				//If given event happens before datetime, returns -1
@@ -236,7 +244,7 @@
 
 
 		  ?>
-
+			</div>
 	</div>
 
 	<div class="right">
