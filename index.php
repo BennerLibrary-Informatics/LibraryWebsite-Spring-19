@@ -178,21 +178,37 @@
 <!-- end #home-hero --></div>
 
 <div class="split l25-r75 cf">
-   <div class="left" style="background-color:grey">
+   <div class="left no-margin-top" >
+		 <div class="margin10-left" style="background-color:#6D6D6D">
+			 <div style="text-align: center">
+			 	<img src="/about/calendar/img/closed_purple.png" alt="closed_purple.png">
+			 </div>
+			 <div style="text-align: center">
+			  <img src="/about/calendar/img/open_purple.png" alt="open_purple.png">
+			 </div>
+
 		 <?php
 		 		$firstItemStart = new DateTime($events[0]->start->dateTime);
 				$firstItemEnd = new DateTime($events[0]->end->dateTime);
+
+				$secondItemStart = new DateTime($events[1]->start->dateTime);
+				$secondItemStart = $secondItemStart->format('M d h:iA');
+
 				$currentDate = Date('Y-m-d');
 				$firstItemEnd = $firstItemEnd->format('h:iA');
-				var_dump($firstItemStart->format('Y-m-d'));
-				var_dump(Date('Y-m-d H:i'));
-				if ($firstItemStart->format('Y-m-d') == $currentDate) {
-					echo "<p>hello the library is currently open until $firstItemEnd</p>";
+				//var_dump($firstItemStart->format('Y-m-d H:i'));
+				//var_dump(Date('Y-m-d H:i'));
+				////var_dump(strtotime($firstItemEnd));
+				//var_dump(time());
+				if ($firstItemStart->format('Y-m-d') == $currentDate
+				&& strtotime($firstItemStart->format('H:i')) < time()
+				&& strtotime($firstItemEnd) > time()) {
+					echo "<p>Hello, the library is currently open today until $firstItemEnd</p>";
 				} else {
-					print("<p>Library is closed</p>");
+					print("<p>Library is closed until $secondItemStart</p>");
 				}
 		  ?>
-
+			</div>
 	</div>
 
 	<div class="right">
