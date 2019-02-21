@@ -93,7 +93,7 @@
 				'orderBy' => 'startTime',
 				'singleEvents' => true,
 				'timeMin' => date('c'),//Uses server date as minimum
-				'maxResults' => $numEvents;
+				'maxResults' => $numEvents
 			);
 			$results = $service->events->listEvents($calendarId, $optParams);
 			$events = $results->getItems();
