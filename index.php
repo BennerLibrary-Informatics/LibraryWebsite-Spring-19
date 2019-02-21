@@ -99,7 +99,7 @@
 			$events = $results->getItems();
 			return $events;
 		}
-	} 
+	}
 ?>
 
 <!-- if would like to go back to static picture comment out style portion below and modify home-hero.less file -->
@@ -167,8 +167,7 @@
 
 <div class="split l25-r75 cf">
    <div class="left no-margin-top" >
-		 <div class="margin10-left" style="background-color:#6D6D6D">
-			 
+		 <div class="margin10-left">
 
 		 <?php
 				//If given datetime falls within the event, returns 0
@@ -234,6 +233,7 @@
 				//Print time and UTC designation
 				$cReadableTime = date('g:ia (T)');
 				echo "<p>It is currently $cReadableTime</p>";
+				echo "<p><a href=/about/calendar/index.php>Full Calendar</a></p>"
 
 
 		  ?>
