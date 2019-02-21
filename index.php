@@ -86,7 +86,9 @@
 			$service = new Google_Service_Calendar($client);
 
 			// Print the next 10 events on the user's calendar.
-			$calendarId = '72ts5jjncg48q761l4bsl9589g@group.calendar.google.com';
+			//Test calendar ID - agile45501@gmail.com
+			//Benner Cal ID - 72ts5jjncg48q761l4bsl9589g@group.calendar.google.com
+			$calendarId = 'agile45501@gmail.com';
 			$optParams = array(
 				'maxResults' => $numEvents,
 				'orderBy' => 'startTime',
@@ -164,11 +166,65 @@
 <!-- end #home-hero --></div>
 
 <div class="split l25-r75 cf">
-   <div class="left" style="background-color:grey">
+   <div class="left no-margin-top" >
+		 <div class="margin10-left" style="background-color:#6D6D6D">
+			 <div style="text-align: center">
+			 	<img src="/about/calendar/img/closed_purple.png" alt="closed_purple.png">
+			 </div>
+			 <div style="text-align: center">
+			  <img src="/about/calendar/img/open_purple.png" alt="open_purple.png">
+			 </div>
+
 		 <?php
-				$events = getEvents();
-				$cDateTime = date('c');
-				
+				//If given datetime falls within the event, returns 0
+				//If given event happens before datetime, returns -1
+				//If given event happens after datetime, returns 1
+				function compareDate($gCalEvent,$dTime) {
+					$eventStart = new DateTime($gCalEvent->start->dateTime);
+					$eventEnd = new Datetime($gCalEvent->end->dateTime);
+					if($dTime < $eventStart) { return 1;}
+					else
+					if($dTime > $eventEnd) { return -1;}
+					else
+					return 0;
+				}
+
+				$events = getEvents();//Grab events from google calendar
+				$cDateTime = date('c');//Get current date
+				$nextRelevantDateTime;
+				$isOpen = false;//Assume we are closed
+
+				//Iterate through events
+				for($i = 0; $i < count($events); $i++) {
+					$event = $events[$i];
+					$compResult = compareDate($event,$cDateTime);//Compare to current date
+					if($compResult == 0) {//If we are WITHIN the event
+						//Check if the event is open
+						$pregResult = preg_match("(?i)\bopen\b",$event->getSummary());
+						if($pregResult == -1) {
+							//We are open, next relevant dateTime is when we close
+							$isOpen = true;
+							$nextRelevantDateTime = $event->end->dateTime;
+							break;
+							}
+					}
+					else {
+						if($compResult == 1) {//If we are BEFORE the event
+							$pregResult = preg_match("(?i)\bopen\b",$event->getSummary());
+							$isOpen = false;//If we haven't broken at this point, we are not inside an open event
+							if($pregResult == 1) {
+								$nextRelevantDateTime = $event->end->dateTime;
+							}
+							break;
+						}
+					}
+					//If compResult is -1, the even came and went already and we don't care
+				}
+
+				$nextEventTime;
+
+
+
 				//Test cases
 				//The library is not open, but will be today - Closed sign. "Library will open"
 				//The library is closed for the day
@@ -188,7 +244,7 @@
 
 
 		  ?>
-
+			</div>
 	</div>
 
 	<div class="right">
