@@ -90,10 +90,10 @@
 			//Benner Cal ID - 72ts5jjncg48q761l4bsl9589g@group.calendar.google.com
 			$calendarId = 'agile45501@gmail.com';
 			$optParams = array(
-				'maxResults' => $numEvents,
 				'orderBy' => 'startTime',
 				'singleEvents' => true,
 				'timeMin' => date('c'),//Uses server date as minimum
+				'maxResults' => $numEvents;
 			);
 			$results = $service->events->listEvents($calendarId, $optParams);
 			$events = $results->getItems();
@@ -171,78 +171,65 @@
 			 
 
 		 <?php
-
-		 //<div style="text-align: center">
 				//If given datetime falls within the event, returns 0
 				//If given event happens before datetime, returns -1
 				//If given event happens after datetime, returns 1
-
+				date_default_timezone_set("America/Chicago");
 				function compareDate($gCalEvent,$dTime) {
 					$eventStart = new DateTime($gCalEvent->start->dateTime);
-					$eventEnd = new Datetime($gCalEvent->end->dateTime);
+					$eventEnd = new DateTime($gCalEvent->end->dateTime);
 					if($dTime < $eventStart) { return 1;}
 					else
 					if($dTime > $eventEnd) { return -1;}
-					else
-					return 0;
+					else {  return 0; }
 				}
 
-				$events = getEvents();//Grab events from google calendar
-				$cDateTime = date('c');//Get current date
+				$events = getEvents(10);//Grab events from google calendar
+				$cDateTime = new DateTime(date('c'));//Get current date
 				$nextRelevantDateTime;
 				$isOpen = false;//Assume we are closed
-
 				//Iterate through events
 				for($i = 0; $i < count($events); $i++) {
 					$event = $events[$i];
 					$compResult = compareDate($event,$cDateTime);//Compare to current date
+					//echo "<p>$i :: sTime=$sTime :: eTime=$eTime :: compResult=$compResult";
 					if($compResult == 0) {//If we are WITHIN the event
 						//Check if the event is open
 						$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());
 						if($pregResult == 1) {
 							//We are open, next relevant dateTime is when we close
 							$isOpen = true;
-							$nextRelevantDateTime = $event->end->dateTime;
+							$nextRelevantDateTime = new Datetime($event->end->dateTime);
 							break;
 							}
 					}
 					else {
 						if($compResult == 1) {//If we are BEFORE the event
-							$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());
-							$isOpen = false;//If we haven't broken at this point, we are not inside an open event
+							$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());//Make sure next event is an open
 							if($pregResult == 1) {
-								$nextRelevantDateTime = $event->end->dateTime;
+								$nextRelevantDateTime = new Datetime($event->start->dateTime);
+								$isOpen = false;//If we haven't broken at this point, we are not inside an open event
+								break;
 							}
-							break;
 						}
 					}
 					//If compResult is -1, the event came and went already and we don't care
 				}
 
-
-
-				//Test cases
-				//The library is not open, but will be today - Closed sign. "Library will open"
-				//The library is closed for the day
-				//The library is open
-				//The library is not open, and will not be for at least a day
-				//The library is closed for a special event
-				//2019-02-16T10:11:02+00:00
-				
-				$nextRelevantDateTime=date_create("2019-02-21");
-
-				if($isOpen = true) {
-					echo"<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_purple.png\" alt=\"open_purple.png\"></div>";
-					echo "<p>The Library is open until </p>";
-					echo date_format($nextRelevantDateTime,"Y/m/d H:i:s");
+				if($isOpen) {
+					echo "<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_purple.png\" alt=\"open_purple.png\"></div>";
+					echo "<p>The Library will close at ";
+					echo date_format($nextRelevantDateTime,"g:ia");
+					echo "</p>";
 				}
 				else {
 					echo"<div style=\"text-align: center\"><img src=\"/about/calendar/img/closed_purple.png\" alt=\"closed_purple.png\"></div>";
-					echo "<p>The Library is closed until</p>";
-					echo date_format($nextRelevantDateTime,"Y/m/d H:i:s");
+					echo "<p>The Library will open on ";
+					echo date_format($nextRelevantDateTime,"m/d");
+					echo " at ";
+					echo date_format($nextRelevantDateTime,"g:ia");
+					echo "</p>";
 				}
-
-				
 
 				//Print time and UTC designation
 				$cReadableTime = date('g:ia (T)');
