@@ -168,17 +168,15 @@
 <div class="split l25-r75 cf">
    <div class="left no-margin-top" >
 		 <div class="margin10-left" style="background-color:#6D6D6D">
-			 <div style="text-align: center">
-			 	<img src="/about/calendar/img/closed_purple.png" alt="closed_purple.png">
-			 </div>
-			 <div style="text-align: center">
-			  <img src="/about/calendar/img/open_purple.png" alt="open_purple.png">
-			 </div>
+			 
 
 		 <?php
+
+		 //<div style="text-align: center">
 				//If given datetime falls within the event, returns 0
 				//If given event happens before datetime, returns -1
 				//If given event happens after datetime, returns 1
+
 				function compareDate($gCalEvent,$dTime) {
 					$eventStart = new DateTime($gCalEvent->start->dateTime);
 					$eventEnd = new Datetime($gCalEvent->end->dateTime);
@@ -200,8 +198,8 @@
 					$compResult = compareDate($event,$cDateTime);//Compare to current date
 					if($compResult == 0) {//If we are WITHIN the event
 						//Check if the event is open
-						$pregResult = preg_match("(?i)\bopen\b",$event->getSummary());
-						if($pregResult == -1) {
+						$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());
+						if($pregResult == 1) {
 							//We are open, next relevant dateTime is when we close
 							$isOpen = true;
 							$nextRelevantDateTime = $event->end->dateTime;
@@ -210,7 +208,7 @@
 					}
 					else {
 						if($compResult == 1) {//If we are BEFORE the event
-							$pregResult = preg_match("(?i)\bopen\b",$event->getSummary());
+							$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());
 							$isOpen = false;//If we haven't broken at this point, we are not inside an open event
 							if($pregResult == 1) {
 								$nextRelevantDateTime = $event->end->dateTime;
@@ -218,10 +216,8 @@
 							break;
 						}
 					}
-					//If compResult is -1, the even came and went already and we don't care
+					//If compResult is -1, the event came and went already and we don't care
 				}
-
-				$nextEventTime;
 
 
 
