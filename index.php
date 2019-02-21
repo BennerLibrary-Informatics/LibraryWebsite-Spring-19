@@ -228,10 +228,20 @@
 				//The library is not open, and will not be for at least a day
 				//The library is closed for a special event
 				//2019-02-16T10:11:02+00:00
-
 				
+				$nextRelevantDateTime=date_create("2019-02-21");
 
-				echo $cDateTime;
+				if($isOpen = true) {
+					echo"<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_purple.png\" alt=\"open_purple.png\"></div>";
+					echo "<p>The Library is open until </p>";
+					echo date_format($nextRelevantDateTime,"Y/m/d H:i:s");
+				}
+				else {
+					echo"<div style=\"text-align: center\"><img src=\"/about/calendar/img/closed_purple.png\" alt=\"closed_purple.png\"></div>";
+					echo "<p>The Library is closed until</p>";
+					echo date_format($nextRelevantDateTime,"Y/m/d H:i:s");
+				}
+
 				
 
 				//Print time and UTC designation
