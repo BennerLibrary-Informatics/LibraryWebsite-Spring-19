@@ -241,21 +241,29 @@
 
 		 <?php
 				date_default_timezone_set("America/Chicago");
-				$eventSearchResults = getOpenCloseDates();
-
+				$eventResults = getOpenCloseDates();
+				$isOpen = $eventResults[0];
+				$relevantDate = $eventResults[1];
+				$nextRelevantDate = $eventResults[2];
+				//isOpen - Boolean - Is the library currently open at this instant?
+				//relevantDate - date - if isOpen, the date we will close. if not isOpen, the date we will next open
+				//nextRelevantDate - date - if isOpen, the date we will next open, if closed, the date we will next close
+				
+				//TODO - Update display code to include nextRelevantDate
+				//TODO - introduce some sort of error handling in case isOpen or relevantDate are null
 
 				if($isOpen) {
 					echo "<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_purple.png\" alt=\"open_purple.png\"></div>";
 					echo "<p>The Library will close at ";
-					echo date_format($nextRelevantDateTime,"g:ia");
+					echo date_format($relevantDate,"g:ia");
 					echo "</p>";
 				}
 				else {
 					echo"<div style=\"text-align: center\"><img src=\"/about/calendar/img/closed_purple.png\" alt=\"closed_purple.png\"></div>";
 					echo "<p>The Library will open on ";
-					echo date_format($nextRelevantDateTime,"m/d");
+					echo date_format($relevantDate,"m/d");
 					echo " at ";
-					echo date_format($nextRelevantDateTime,"g:ia");
+					echo date_format($relevantDate,"g:ia");
 					echo "</p>";
 				}
 
