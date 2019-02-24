@@ -237,8 +237,7 @@
 
 <div class="split l25-r75 cf">
    <div class="left no-margin-top" >
-		 <div class="margin10-left" style="background-color:#6D6D6D">
-			 
+		 <div class="margin10-left">
 
 		 <?php
 				date_default_timezone_set("America/Chicago");
@@ -263,6 +262,7 @@
 				//Print time and UTC designation
 				$cReadableTime = date('g:ia (T)');
 				echo "<p>It is currently $cReadableTime</p>";
+				echo "<p><a href=/about/calendar/index.php>Full Calendar</a></p>"
 
 
 		  ?>
