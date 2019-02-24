@@ -79,7 +79,8 @@
 	    return $client;
 	}
 
-	function getEvents($minTime = date('c'),$numEvents = 10 ) {
+	function getEvents($minTime,$numEvents = 10 ) {
+		if($minTime == null) { $minTime = date('c'); }
 		if(file_exists('credentials.json')) {
 			// Get the API client and construct the service object.
 			$client = getClient();
@@ -150,10 +151,10 @@
 		$relevantDate = null;
 		$nextRelevantDate = null;
 		$currentDate = Date('c');
-		$maxDate = date_add($currentDate, new DateInterval('P2M'))//max search date is 2 months from current
-		$nextOpen1 = getNextOpenFromDate($currentDate,$maxDate);
+		$maxDate = date_add(new DateTime($currentDate), new DateInterval('P2M'));//max search date is 2 months from current
+		$nextOpen1 = getNextOpenFromDate($currentDate,$maxDate,null);
 					
-		if(nextOpen1 != null) {//If a date was found
+		if($nextOpen1 != null) {//If a date was found
 			if(compareDate($nextOpen1[0],$currentDate) == 0) { //Currently open
 				$isOpen = true;
 				$relevantDate = $nextOpen1[0]->end->dateTime;//Time we will be closing
@@ -165,7 +166,7 @@
 			else {//Currently closed
 				$isOpen = false;
 				$relevantDate = $nextOpen1[0]->start->dateTime;//Time we will be opening
-				$nextRelevantDate = $nextopen1[0]->end->dateTime;//Time we will be closing
+				$nextRelevantDate = $nextOpen1[0]->end->dateTime;//Time we will be closing
 			}
 		}
 		return array($isOpen,$relevantDate,$nextRelevantDate);
@@ -243,8 +244,8 @@
 				date_default_timezone_set("America/Chicago");
 				$eventResults = getOpenCloseDates();
 				$isOpen = $eventResults[0];
-				$relevantDate = $eventResults[1];
-				$nextRelevantDate = $eventResults[2];
+				$relevantDate = new DateTime($eventResults[1]);
+				$nextRelevantDate = new DateTime($eventResults[2]);
 				//isOpen - Boolean - Is the library currently open at this instant?
 				//relevantDate - date - if isOpen, the date we will close. if not isOpen, the date we will next open
 				//nextRelevantDate - date - if isOpen, the date we will next open, if closed, the date we will next close
