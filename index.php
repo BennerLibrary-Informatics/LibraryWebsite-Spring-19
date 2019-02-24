@@ -79,7 +79,7 @@
 	    return $client;
 	}
 
-	function getEvents($numEvents = 2) {
+	function getEvents($minTime = date('c'),$numEvents = 10 ) {
 		if(file_exists('credentials.json')) {
 			// Get the API client and construct the service object.
 			$client = getClient();
@@ -92,13 +92,83 @@
 			$optParams = array(
 				'orderBy' => 'startTime',
 				'singleEvents' => true,
-				'timeMin' => date('c'),//Uses server date as minimum
+				'timeMin' => $minTime,//Uses server date as minimum
 				'maxResults' => $numEvents
 			);
 			$results = $service->events->listEvents($calendarId, $optParams);
 			$events = $results->getItems();
 			return $events;
 		}
+	} 
+	//If given datetime falls within the event, returns 0
+	//If given event happens before datetime, returns -1
+	//If given event happens after datetime, returns 1
+	function compareDate($gCalEvent,$dTime) {
+		$eventStart = new DateTime($gCalEvent->start->dateTime);
+		$eventEnd = new DateTime($gCalEvent->end->dateTime);
+		if($dTime < $eventStart) { return 1;}
+		else
+		if($dTime > $eventEnd) { return -1;}
+		else {  return 0; }
+	}
+
+	//Returns a found event, and the array it was found in
+	//The reason for returning the array of events is because we want to minimize the number of times we call to the google calendar
+	//In the event that a single grouping of events contains all we need, this means we can get away with calling the API only once by externally searching with the same array
+	//If the array given does not contain an open date occuring after the sdate, then the function will behave normally and make API calls to look forward.
+	function getNextOpenFromDate($sDate,$maxRecursionDate, $events) {
+		if($events == null) { $events = getEvents($sDate); }//If we are given an array, use it. Otherwise, populate one from the calendar
+		for($i = 0; $i < count($events); $i++) {//Iterate through returned events and find one that is open
+			$event = $events[$i];
+			$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());//Matches any summary containing "open" as a standalone word
+			if($pregResult == 1) {//Make sure it has not already passed
+				if(compareDate($event, $sDate) > -1) {//Either within, or before date
+					return array($event,$events);
+				}
+			}
+		}
+		//No open was found within returned batch.
+		$numEvents = count($events);
+		if($numEvents == 0) {//There were no events to begin with, meaning we either lost connection or there are no events in the future
+			return null;
+		}
+		else {//Look further in the future for an open event
+			$nextTryDate = new DateTime($events[$numEvents-1]->end->dateTime);
+			if($nextTryDate > $maxRecursionDate) {//We have reached cutoff date, stop looking
+				return null;
+			}
+			else {//Keep looking starting from end last date returned
+				return getNextOpenFromDate($nextTryDate, $maxRecursionDate);
+			}
+		}
+	}
+
+	//Return in array the following format:
+	// [ isCurrentlyOpen, RelevantDate, nextRelevantDate ]
+	function getOpenCloseDates() {
+		$isOpen = null;
+		$relevantDate = null;
+		$nextRelevantDate = null;
+		$currentDate = Date('c');
+		$maxDate = date_add($currentDate, new DateInterval('P2M'))//max search date is 2 months from current
+		$nextOpen1 = getNextOpenFromDate($currentDate,$maxDate);
+					
+		if(nextOpen1 != null) {//If a date was found
+			if(compareDate($nextOpen1[0],$currentDate) == 0) { //Currently open
+				$isOpen = true;
+				$relevantDate = $nextOpen1[0]->end->dateTime;//Time we will be closing
+				$nextOpen2 = getNextOpenFromDate($relevantDate,$maxDate,$nextOpen1[1]);//Look for next open date, starting from when we close
+				if(nextOpen2 != null) {
+					$nextRelevantDate = nextOpen2[0]->start->dateTime;//datetime we will be opening again
+				}
+			}
+			else {//Currently closed
+				$isOpen = false;
+				$relevantDate = $nextOpen1[0]->start->dateTime;//Time we will be opening
+				$nextRelevantDate = $nextopen1[0]->end->dateTime;//Time we will be closing
+			}
+		}
+		return array($isOpen,$relevantDate,$nextRelevantDate);
 	}
 ?>
 
@@ -170,50 +240,9 @@
 		 <div class="margin10-left">
 
 		 <?php
-				//If given datetime falls within the event, returns 0
-				//If given event happens before datetime, returns -1
-				//If given event happens after datetime, returns 1
 				date_default_timezone_set("America/Chicago");
-				function compareDate($gCalEvent,$dTime) {
-					$eventStart = new DateTime($gCalEvent->start->dateTime);
-					$eventEnd = new DateTime($gCalEvent->end->dateTime);
-					if($dTime < $eventStart) { return 1;}
-					else
-					if($dTime > $eventEnd) { return -1;}
-					else {  return 0; }
-				}
+				$eventSearchResults = getOpenCloseDates();
 
-				$events = getEvents(10);//Grab events from google calendar
-				$cDateTime = new DateTime(date('c'));//Get current date
-				$nextRelevantDateTime;
-				$isOpen = false;//Assume we are closed
-				//Iterate through events
-				for($i = 0; $i < count($events); $i++) {
-					$event = $events[$i];
-					$compResult = compareDate($event,$cDateTime);//Compare to current date
-					//echo "<p>$i :: sTime=$sTime :: eTime=$eTime :: compResult=$compResult";
-					if($compResult == 0) {//If we are WITHIN the event
-						//Check if the event is open
-						$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());
-						if($pregResult == 1) {
-							//We are open, next relevant dateTime is when we close
-							$isOpen = true;
-							$nextRelevantDateTime = new Datetime($event->end->dateTime);
-							break;
-							}
-					}
-					else {
-						if($compResult == 1) {//If we are BEFORE the event
-							$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());//Make sure next event is an open
-							if($pregResult == 1) {
-								$nextRelevantDateTime = new Datetime($event->start->dateTime);
-								$isOpen = false;//If we haven't broken at this point, we are not inside an open event
-								break;
-							}
-						}
-					}
-					//If compResult is -1, the event came and went already and we don't care
-				}
 
 				if($isOpen) {
 					echo "<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_purple.png\" alt=\"open_purple.png\"></div>";
