@@ -216,7 +216,7 @@
 				}
 
 				if($isOpen) {
-					echo "<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_purple.png\" alt=\"open_purple.png\"></div>";
+					echo "<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_green.png\" alt=\"open_green.png\"></div>";
 					echo "<p>The Library will close at ";
 					echo date_format($nextRelevantDateTime,"g:ia");
 					echo "</p>";
