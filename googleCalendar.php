@@ -172,21 +172,21 @@ $nextRelevantDate = new DateTime($eventResults[2]);
 //TODO - introduce some sort of error handling in case isOpen or relevantDate are null
 
 //Print time and UTC designation
-$cReadableTime = date('g:ia (T)');
-echo "<p>It is currently $cReadableTime</p>";
+$cReadableTime = date('m/d/y g:ia (T)');
+echo "<p>Current Date: $cReadableTime</p>";
 
 if($isOpen) {
-  echo "<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_green.png\" alt=\"open_green.png\"></div>";
+  echo "<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/open_green.png\" alt=\"open_green.png\"></a></div>";
   echo "<p>The Library will close at ";
   echo date_format($relevantDate,"g:ia");
-  echo "The library will open again on ";
+  echo "  and will open again on ";
   echo date_format($nextRelevantDate, "m/d");
   echo " at ";
   echo date_format($nextRelevantDate, "g:ia");
   echo "</p>";
 }
 else {
-  echo"<div style=\"text-align: center\"><img src=\"/about/calendar/img/closed_purple.png\" alt=\"closed_purple.png\"></div>";
+  echo"<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/closed_purple.png\" alt=\"closed_purple.png\"></a></div>";
   echo "<p>The Library will open on ";
   echo date_format($relevantDate,"m/d");
   echo " at ";
@@ -194,6 +194,6 @@ else {
   echo "</p>";
 }
 
-echo "<p><a href=/about/calendar/index.php>Full Calendar</a></p>";
+//echo "<p><a href=/about/calendar/index.php>Full Calendar</a></p>";
 
 ?>
