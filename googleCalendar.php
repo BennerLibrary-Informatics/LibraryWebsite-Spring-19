@@ -173,11 +173,11 @@ $nextRelevantDate = new DateTime($eventResults[2]);
 
 //Print time and UTC designation
 $cReadableTime = date('m/d/y g:ia (T)');
-echo "<p>Current Date: $cReadableTime</p>";
+echo "<p class=no-margin>Current Date: $cReadableTime</p>";
 
 if($isOpen) {
   echo "<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/open_green.png\" alt=\"open_green.png\"></a></div>";
-  echo "<p>The Library will close at ";
+  echo "<p class=no-margin>The Library will close at ";
   echo date_format($relevantDate,"g:ia");
   echo "  and will open again on ";
   echo date_format($nextRelevantDate, "m/d");
@@ -187,7 +187,7 @@ if($isOpen) {
 }
 else {
   echo"<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/closed_purple.png\" alt=\"closed_purple.png\"></a></div>";
-  echo "<p>The Library will open on ";
+  echo "<p class=no-margin>The Library will open on ";
   echo date_format($relevantDate,"m/d");
   echo " at ";
   echo date_format($relevantDate,"g:ia");
