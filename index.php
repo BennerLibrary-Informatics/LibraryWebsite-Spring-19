@@ -79,7 +79,8 @@
 	    return $client;
 	}
 
-	function getEvents($minTime = date('c'),$numEvents = 10 ) {
+	function getEvents($minTime,$numEvents = 10 ) {
+		if($minTime == null) { $minTime = date('c'); }
 		if(file_exists('credentials.json')) {
 			// Get the API client and construct the service object.
 			$client = getClient();
@@ -104,12 +105,21 @@
 	//If given event happens before datetime, returns -1
 	//If given event happens after datetime, returns 1
 	function compareDate($gCalEvent,$dTime) {
-		$eventStart = new DateTime($gCalEvent->start->dateTime);
-		$eventEnd = new DateTime($gCalEvent->end->dateTime);
+		$eventStart = new Datetime($gCalEvent->start->dateTime);
+		$eventEnd = new Datetime($gCalEvent->end->dateTime);
+		//printLine("D1=".$gCalEvent->start->dateTime);
+		//printLine("D2=".$gCalEvent->end->dateTime);
+		//printLine("D3=".$dTime);
 		if($dTime < $eventStart) { return 1;}
 		else
-		if($dTime > $eventEnd) { return -1;}
-		else {  return 0; }
+		if($dTime >= $eventEnd) { return -1;}
+		else { return 0; }
+	}
+
+	function printLine($s) {
+		echo "<p>";
+		echo $s;
+		echo "</p>";
 	}
 
 	//Returns a found event, and the array it was found in
@@ -118,11 +128,12 @@
 	//If the array given does not contain an open date occuring after the sdate, then the function will behave normally and make API calls to look forward.
 	function getNextOpenFromDate($sDate,$maxRecursionDate, $events) {
 		if($events == null) { $events = getEvents($sDate); }//If we are given an array, use it. Otherwise, populate one from the calendar
+		$compDate = new DateTime($sDate);
 		for($i = 0; $i < count($events); $i++) {//Iterate through returned events and find one that is open
 			$event = $events[$i];
 			$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());//Matches any summary containing "open" as a standalone word
 			if($pregResult == 1) {//Make sure it has not already passed
-				if(compareDate($event, $sDate) > -1) {//Either within, or before date
+				if(compareDate($event, $compDate) > -1) {//Either within, or before date
 					return array($event,$events);
 				}
 			}
@@ -133,12 +144,12 @@
 			return null;
 		}
 		else {//Look further in the future for an open event
-			$nextTryDate = new DateTime($events[$numEvents-1]->end->dateTime);
+			$nextTryDate = $events[$numEvents-1]->end->dateTime;
 			if($nextTryDate > $maxRecursionDate) {//We have reached cutoff date, stop looking
 				return null;
 			}
 			else {//Keep looking starting from end last date returned
-				return getNextOpenFromDate($nextTryDate, $maxRecursionDate);
+				return getNextOpenFromDate($nextTryDate, $maxRecursionDate, null);
 			}
 		}
 	}
@@ -150,22 +161,24 @@
 		$relevantDate = null;
 		$nextRelevantDate = null;
 		$currentDate = Date('c');
-		$maxDate = date_add($currentDate, new DateInterval('P2M'))//max search date is 2 months from current
-		$nextOpen1 = getNextOpenFromDate($currentDate,$maxDate);
-					
-		if(nextOpen1 != null) {//If a date was found
-			if(compareDate($nextOpen1[0],$currentDate) == 0) { //Currently open
+		$maxDate = date_add(new DateTime($currentDate), new DateInterval('P2M'));//max search date is 2 months from current
+		$nextOpen1 = getNextOpenFromDate($currentDate,$maxDate,null);
+	
+
+		if($nextOpen1 != null) {//If a date was found
+			$compDate = new DateTime($currentDate);
+			if(compareDate($nextOpen1[0],$compDate) == 0) { //Currently open
 				$isOpen = true;
 				$relevantDate = $nextOpen1[0]->end->dateTime;//Time we will be closing
 				$nextOpen2 = getNextOpenFromDate($relevantDate,$maxDate,$nextOpen1[1]);//Look for next open date, starting from when we close
-				if(nextOpen2 != null) {
-					$nextRelevantDate = nextOpen2[0]->start->dateTime;//datetime we will be opening again
+				if($nextOpen2 != null) {
+					$nextRelevantDate = $nextOpen2[0]->start->dateTime;//datetime we will be opening again
 				}
 			}
 			else {//Currently closed
 				$isOpen = false;
 				$relevantDate = $nextOpen1[0]->start->dateTime;//Time we will be opening
-				$nextRelevantDate = $nextopen1[0]->end->dateTime;//Time we will be closing
+				$nextRelevantDate = $nextOpen1[0]->end->dateTime;//Time we will be closing
 			}
 		}
 		return array($isOpen,$relevantDate,$nextRelevantDate);
@@ -241,29 +254,44 @@
 
 		 <?php
 				date_default_timezone_set("America/Chicago");
-				$eventSearchResults = getOpenCloseDates();
+				$eventResults = getOpenCloseDates();
+				$isOpen = (bool)$eventResults[0];
+				$relevantDate = new DateTime($eventResults[1]);
+				$nextRelevantDate = new DateTime($eventResults[2]);
+
+				//isOpen - Boolean - Is the library currently open at this instant?
+				//relevantDate - date - if isOpen, the date we will close. if not isOpen, the date we will next open
+				//nextRelevantDate - date - if isOpen, the date we will next open, if closed, the date we will next close
+				
+				//TODO - Update display code to include nextRelevantDate
+				//TODO - introduce some sort of error handling in case isOpen or relevantDate are null
+				
+				//Print time and UTC designation
+				$cReadableTime = date('g:ia (T)');
+				echo "<p>It is currently $cReadableTime</p>";
+				
 
 
 				if($isOpen) {
 					echo "<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_purple.png\" alt=\"open_purple.png\"></div>";
 					echo "<p>The Library will close at ";
-					echo date_format($nextRelevantDateTime,"g:ia");
+					echo date_format($relevantDate,"g:ia");
+					echo "The library will open again on ";
+					echo date_format($nextRelevantDate, "m/d");
+					echo " at ";
+					echo date_format($nextRelevantDate, "g:ia");
 					echo "</p>";
 				}
 				else {
 					echo"<div style=\"text-align: center\"><img src=\"/about/calendar/img/closed_purple.png\" alt=\"closed_purple.png\"></div>";
 					echo "<p>The Library will open on ";
-					echo date_format($nextRelevantDateTime,"m/d");
+					echo date_format($relevantDate,"m/d");
 					echo " at ";
-					echo date_format($nextRelevantDateTime,"g:ia");
+					echo date_format($relevantDate,"g:ia");
 					echo "</p>";
 				}
 
-				//Print time and UTC designation
-				$cReadableTime = date('g:ia (T)');
-				echo "<p>It is currently $cReadableTime</p>";
-				echo "<p><a href=/about/calendar/index.php>Full Calendar</a></p>"
-
+				echo "<p><a href=/about/calendar/index.php>Full Calendar</a></p>";
 
 		  ?>
 			</div>
