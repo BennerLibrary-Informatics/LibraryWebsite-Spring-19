@@ -257,6 +257,10 @@
 					echo "<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_purple.png\" alt=\"open_purple.png\"></div>";
 					echo "<p>The Library will close at ";
 					echo date_format($relevantDate,"g:ia");
+					echo "The library will open again on ";
+					echo date_format($nextRelevantDate, "m/d");
+					echo " at ";
+					echo date_format($nextRelevantDate, "g:ia");
 					echo "</p>";
 				}
 				else {
