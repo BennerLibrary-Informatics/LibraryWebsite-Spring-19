@@ -173,7 +173,7 @@ $nextRelevantDate = new DateTime($eventResults[2]);
 
 //Print time and UTC designation
 $cReadableTime = date('M d, g:ia (T)');
-echo "<p class=no-margin>Current Date: $cReadableTime</p>";
+echo "<p class=\"no-margin-right no-margin-left no-margin-top margin5-bottom\">Current Date: $cReadableTime</p>";
 
 if($isOpen) {
   echo "<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/open_green.png\" alt=\"open_green.png\"></a></div>";
