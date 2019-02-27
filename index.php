@@ -100,12 +100,12 @@
 
 					function timestamp() {
 	 					$.ajax({
-			 			url: 'googleCalendar.php',
-			 			success: function(data) {
+			 				url: 'googleCalendar.php',
+			 				success: function(data) {
 					 		$('#googleCal').html(data);
-			 			},
-	 				});
-				}
+			 				},
+	 					});
+					}
 			 </script>
 		 	<?php
 				include_once("googleCalendar.php");
