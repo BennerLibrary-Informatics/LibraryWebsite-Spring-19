@@ -173,22 +173,22 @@ $nextRelevantDate = new DateTime($eventResults[2]);
 
 //Print time and UTC designation
 $cReadableTime = date('M d, g:ia (T)');
-echo "<p class=\"no-margin-right no-margin-left no-margin-top margin5-bottom\">Current Date: $cReadableTime</p>";
+echo "<p style='text-align: center' class='no-margin-right no-margin-left no-margin-top margin5-bottom'>Current Date: $cReadableTime</p>";
 
 if($isOpen) {
   echo "<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/open_green.png\" alt=\"open_green.png\"></a></div>";
-  echo "<p class=no-margin>The Library will close at ";
+  echo "<p style='text-align: center' class='no-margin-top no-margin-left no-margin-right margin5-bottom'>Closes at ";
   echo date_format($relevantDate,"g:ia");
-  echo "  and will open again on ";
-  echo date_format($nextRelevantDate, "D. M d");
+  echo "</p><p style='text-align: center' class='no-margin-top no-margin-left no-margin-right margin5-bottom'>Reopens on ";
+  echo date_format($nextRelevantDate, "l M d");
   echo " at ";
   echo date_format($nextRelevantDate, "g:ia");
   echo "</p>";
 }
 else {
   echo"<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/closed_purple.png\" alt=\"closed_purple.png\"></a></div>";
-  echo "<p class=no-margin>The Library will open on ";
-  echo date_format($relevantDate,"D. M d");
+  echo "<p style='text-align: center' class='no-margin-top no-margin-left no-margin-right margin5-bottom'>Opens ";
+  echo date_format($relevantDate,"l M d");
   echo " at ";
   echo date_format($relevantDate,"g:ia");
   echo "</p>";
