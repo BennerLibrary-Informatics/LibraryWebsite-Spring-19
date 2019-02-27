@@ -174,7 +174,12 @@ if (!isset($_COOKIE["relevantDate"])) {
   $relevantDate = new DateTime($_COOKIE["relevantDate"]);
   $nextRelevantDate = new DateTime($_COOKIE["nextRelevantDate"]);
 }
-
+$current = new DateTime(Date());
+if ($current >= $relevantDate) {
+  setcookie("isOpen", $eventResults[0], time() + -1, "/");
+  setcookie("relevantDate", $eventResults[1], time() + -1, "/");
+  setcookie("nextRelevantDate", $eventResults[2], time() + -1, "/");
+}
 
 //isOpen - Boolean - Is the library currently open at this instant?
 //relevantDate - date - if isOpen, the date we will close. if not isOpen, the date we will next open
