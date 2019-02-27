@@ -92,7 +92,21 @@
 
 <div class="split l25-r75 cf">
    <div class="left no-margin-top" >
-		 <div class="margin10-left">
+		 <div id="googleCal" class="margin10-left">
+			 <script>
+			 		$(document).ready(function() {
+	 					setInterval(timestamp, 5000);
+					});
+
+					function timestamp() {
+	 					$.ajax({
+			 			url: 'googleCalendar.php',
+			 			success: function(data) {
+					 		$('#googleCal').html(data);
+			 			},
+	 				});
+				}
+			 </script>
 		 	<?php
 				include_once("googleCalendar.php");
 		 	?>
