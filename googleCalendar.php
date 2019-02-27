@@ -159,10 +159,22 @@ function getOpenCloseDates() {
 }
 
 date_default_timezone_set("America/Chicago");
-$eventResults = getOpenCloseDates();
-$isOpen = (bool)$eventResults[0];
-$relevantDate = new DateTime($eventResults[1]);
-$nextRelevantDate = new DateTime($eventResults[2]);
+if (!isset($_COOKIE["relevantDate"])) {
+  $eventResults = getOpenCloseDates();
+  ob_start();
+      setcookie("isOpen", $eventResults[0], time() + 300, "/");
+      setcookie("relevantDate", $eventResults[1], time() + 300, "/");
+      setcookie("nextRelevantDate", $eventResults[2], time() + 300, "/");
+  ob_end_flush();
+  $isOpen = (bool)$eventResults[0];
+  $relevantDate = new DateTime($eventResults[1]);
+  $nextRelevantDate = new DateTime($eventResults[2]);
+} else {
+  $isOpen = (bool)$_COOKIE["isOpen"];
+  $relevantDate = new DateTime($_COOKIE["relevantDate"]);
+  $nextRelevantDate = new DateTime($_COOKIE["nextRelevantDate"]);
+}
+
 
 //isOpen - Boolean - Is the library currently open at this instant?
 //relevantDate - date - if isOpen, the date we will close. if not isOpen, the date we will next open
@@ -173,27 +185,26 @@ $nextRelevantDate = new DateTime($eventResults[2]);
 
 //Print time and UTC designation
 $cReadableTime = date('M d, g:ia (T)');
-echo "<p style='text-align: center' class='no-margin-right no-margin-left no-margin-top margin5-bottom'>Current Date: $cReadableTime</p>";
-
+echo "<p style='text-align: center' class='no-margin-right no-margin-left no-margin-top margin5-bottom'>$cReadableTime</p>";
 if($isOpen) {
-  echo "<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/open_green.png\" alt=\"open_green.png\"></a></div>";
-  echo "<p style='text-align: center' class='no-margin-top no-margin-left no-margin-right margin5-bottom'>Closes at ";
+  echo "<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/open_green.png\" alt=\"open_green.png\"></a>";
+  echo "<p class='no-margin-top no-margin-left no-margin-right margin5-bottom'>Closes: ";
   echo date_format($relevantDate,"g:ia");
-  echo "</p><p style='text-align: center' class='no-margin-top no-margin-left no-margin-right margin5-bottom'>Reopens on ";
-  echo date_format($nextRelevantDate, "l M d");
-  echo " at ";
+  echo "</p><p class='no-margin-top no-margin-left no-margin-right margin5-bottom'>Reopens: ";
   echo date_format($nextRelevantDate, "g:ia");
-  echo "</p>";
+  echo "</p><p class='no-margin-top no-margin-left no-margin-right margin5-bottom'>On ";
+  echo date_format($nextRelevantDate, "l M d");
+  echo "</p></div>";
 }
 else {
   echo"<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/closed_purple.png\" alt=\"closed_purple.png\"></a></div>";
-  echo "<p style='text-align: center' class='no-margin-top no-margin-left no-margin-right margin5-bottom'>Opens ";
-  echo date_format($relevantDate,"l M d");
-  echo " at ";
+  echo "<p style='text-align: center' class='no-margin-top no-margin-left no-margin-right margin5-bottom'>Opens: ";
   echo date_format($relevantDate,"g:ia");
+  echo "</p><p style='text-align: center' class='no-margin-top no-margin-left no-margin-right margin5-bottom'>On ";
+  echo date_format($relevantDate,"l M d");
   echo "</p>";
 }
 
-//echo "<p><a href=/about/calendar/index.php>Full Calendar</a></p>";
+echo "<p style='text-align: center' class='no-margin-top no-margin-left no-margin-right margin5-bottom'><a href=/about/calendar/index.php>Full Calendar</a></p>";
 
 ?>
