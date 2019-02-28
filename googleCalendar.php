@@ -113,6 +113,7 @@ function getNextOpenFromDate($sDate,$maxRecursionDate, $events) {
   //No open was found within returned batch.
   $numEvents = count($events);
   if($numEvents == 0) {//There were no events to begin with, something has gone wrong.
+    throw new gCalendarException("No events returned from google calendar");
     return null;
   }
   else {//Look further in the future for an open event
