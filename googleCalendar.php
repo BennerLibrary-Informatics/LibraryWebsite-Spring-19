@@ -174,7 +174,7 @@ if (!isset($_COOKIE["relevantDate"])) {
   $relevantDate = new DateTime($_COOKIE["relevantDate"]);
   $nextRelevantDate = new DateTime($_COOKIE["nextRelevantDate"]);
 }
-$current = new DateTime(Date());
+$current = new DateTime(Date('c'));
 if ($current >= $relevantDate) {
   setcookie("isOpen", $eventResults[0], time() + -1, "/");
   setcookie("relevantDate", $eventResults[1], time() + -1, "/");
