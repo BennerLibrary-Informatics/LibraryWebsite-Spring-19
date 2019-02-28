@@ -3,6 +3,8 @@ if(file_exists('./vendor/autoload.php')) {
   require_once('./vendor/autoload.php');
 }
 
+class gCalendarException extends Exception {}
+
 //Retrieves google calendar client
 function getClient()
 {
@@ -22,13 +24,14 @@ function getClient()
         $accessToken = json_decode(file_get_contents($tokenPath), true);
         $client->setAccessToken($accessToken);
     }
-
+	
     // If there is no previous token or it's expired.
     if ($client->isAccessTokenExpired()) {
         // Refresh the token if possible, else fetch a new one.
         if ($client->getRefreshToken()) {
             $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
         } else {
+			throw new gCalendarException("Token either does not exist or is expired.");
             // Request authorization from the user.
             $authUrl = $client->createAuthUrl();
             printf("Open the following link in your browser:\n%s\n", $authUrl);
@@ -41,7 +44,7 @@ function getClient()
 
             // Check to see if there was an error.
             if (array_key_exists('error', $accessToken)) {
-                throw new Exception(join(', ', $accessToken));
+				throw new gCalendarException("Fatal token error");
             }
         }
         // Save the token to a file.
@@ -74,6 +77,9 @@ function getEvents($minTime,$numEvents = 10 ) {
     $events = $results->getItems();
     return $events;
   }
+  else {
+	throw new gCalendarException("credentials.json is missing");
+  }
 }
 //If given datetime falls within the event, returns 0
 //If given event happens before datetime, returns -1
@@ -81,19 +87,10 @@ function getEvents($minTime,$numEvents = 10 ) {
 function compareDate($gCalEvent,$dTime) {
   $eventStart = new Datetime($gCalEvent->start->dateTime);
   $eventEnd = new Datetime($gCalEvent->end->dateTime);
-  //printLine("D1=".$gCalEvent->start->dateTime);
-  //printLine("D2=".$gCalEvent->end->dateTime);
-  //printLine("D3=".$dTime);
   if($dTime < $eventStart) { return 1;}
   else
   if($dTime >= $eventEnd) { return -1;}
   else { return 0; }
-}
-
-function printLine($s) {
-  echo "<p>";
-  echo $s;
-  echo "</p>";
 }
 
 //Returns a found event, and the array it was found in
@@ -102,6 +99,7 @@ function printLine($s) {
 //If the array given does not contain an open date occuring after the sdate, then the function will behave normally and make API calls to look forward.
 function getNextOpenFromDate($sDate,$maxRecursionDate, $events) {
   if($events == null) { $events = getEvents($sDate); }//If we are given an array, use it. Otherwise, populate one from the calendar
+  if($events == null) { throw new gCalendarException("No events returned from google calendar"); }
   $compDate = new DateTime($sDate);
   for($i = 0; $i < count($events); $i++) {//Iterate through returned events and find one that is open
     $event = $events[$i];
@@ -114,7 +112,8 @@ function getNextOpenFromDate($sDate,$maxRecursionDate, $events) {
   }
   //No open was found within returned batch.
   $numEvents = count($events);
-  if($numEvents == 0) {//There were no events to begin with, meaning we either lost connection or there are no events in the future
+  if($numEvents == 0) {//There were no events to begin with, something has gone wrong.
+    throw new gCalendarException("No events returned from google calendar");
     return null;
   }
   else {//Look further in the future for an open event
@@ -158,16 +157,14 @@ function getOpenCloseDates() {
   return array($isOpen,$relevantDate,$nextRelevantDate);
 }
 
+try {
+//Make sure all comparisons are done in CST time
 date_default_timezone_set("America/Chicago");
-$current = new DateTime(Date());
-if ($current >= $relevantDate) {
-  setcookie("isOpen", $eventResults[0], time() + -1, "/");
-  setcookie("relevantDate", $eventResults[1], time() + -1, "/");
-  setcookie("nextRelevantDate", $eventResults[2], time() + -1, "/");
-}
-if (!isset($_COOKIE["relevantDate"])) {
-  $eventResults = getOpenCloseDates();
-  ob_start();
+
+//Use cookies to reduce API calls from page refreshes
+if (!(isset($_COOKIE["relevantDate"]) && isset($_COOKIE["nextRelevantDate"]))) {//If no cookie is set for calendar dates
+  $eventResults = getOpenCloseDates();//Get new ones  
+  ob_start();//Set cookies
       setcookie("isOpen", $eventResults[0], time() + 300, "/");
       setcookie("relevantDate", $eventResults[1], time() + 300, "/");
       setcookie("nextRelevantDate", $eventResults[2], time() + 300, "/");
@@ -175,18 +172,23 @@ if (!isset($_COOKIE["relevantDate"])) {
   $isOpen = (bool)$eventResults[0];
   $relevantDate = new DateTime($eventResults[1]);
   $nextRelevantDate = new DateTime($eventResults[2]);
-} else {
+} else {//Retrieve date variables from cookies
   $isOpen = (bool)$_COOKIE["isOpen"];
   $relevantDate = new DateTime($_COOKIE["relevantDate"]);
   $nextRelevantDate = new DateTime($_COOKIE["nextRelevantDate"]);
 }
+  
+$current = new DateTime(Date('c'));
+if ($current >= $relevantDate) {
+  setcookie("isOpen", $eventResults[0], time() + -1, "/");
+  setcookie("relevantDate", $eventResults[1], time() + -1, "/");
+  setcookie("nextRelevantDate", $eventResults[2], time() + -1, "/");
+}
+
 
 //isOpen - Boolean - Is the library currently open at this instant?
 //relevantDate - date - if isOpen, the date we will close. if not isOpen, the date we will next open
 //nextRelevantDate - date - if isOpen, the date we will next open, if closed, the date we will next close
-
-//TODO - Update display code to include nextRelevantDate
-//TODO - introduce some sort of error handling in case isOpen or relevantDate are null
 
 //Print time and UTC designation
 $cReadableTime = date('M d, g:ia (T)');
@@ -211,5 +213,10 @@ else {
 }
 
 echo "<p style='text-align: center' class='no-margin-top no-margin-left no-margin-right margin5-bottom'><a href=/about/calendar/index.php>Full Calendar</a></p>";
-
+}
+catch(gCalendarException $e) {
+	//Log error and output default image
+	error_log($e->getMessage());
+	echo "<div style=\"text-align: center\"><a href=/about/calendar/index.php><img src=\"/about/calendar/img/hours_library.png\" alt=\"library_hours.png\"></a></div>";
+}
 ?>
