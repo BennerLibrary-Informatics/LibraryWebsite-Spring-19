@@ -162,7 +162,7 @@ try {
 date_default_timezone_set("America/Chicago");
 
 //Use cookies to reduce API calls from page refreshes
-if (!(isset($_COOKIE["relevantDate"]) && isset($_COOKIE["nextRelevantDate"]) && isset($_COOKIE["isOpen"]))) {//If no cookie is set for calendar dates
+if (!(isset($_COOKIE["relevantDate"]) && isset($_COOKIE["nextRelevantDate"]))) {//If no cookie is set for calendar dates
   $eventResults = getOpenCloseDates();//Get new ones  
   ob_start();//Set cookies
       setcookie("isOpen", $eventResults[0], time() + 300, "/");
@@ -177,12 +177,14 @@ if (!(isset($_COOKIE["relevantDate"]) && isset($_COOKIE["nextRelevantDate"]) && 
   $relevantDate = new DateTime($_COOKIE["relevantDate"]);
   $nextRelevantDate = new DateTime($_COOKIE["nextRelevantDate"]);
 }
+  
 $current = new DateTime(Date('c'));
 if ($current >= $relevantDate) {
   setcookie("isOpen", $eventResults[0], time() + -1, "/");
   setcookie("relevantDate", $eventResults[1], time() + -1, "/");
   setcookie("nextRelevantDate", $eventResults[2], time() + -1, "/");
 }
+
 
 //isOpen - Boolean - Is the library currently open at this instant?
 //relevantDate - date - if isOpen, the date we will close. if not isOpen, the date we will next open
