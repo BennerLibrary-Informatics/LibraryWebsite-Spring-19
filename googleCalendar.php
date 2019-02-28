@@ -159,6 +159,12 @@ function getOpenCloseDates() {
 }
 
 date_default_timezone_set("America/Chicago");
+$current = new DateTime(Date());
+if ($current >= $relevantDate) {
+  setcookie("isOpen", $eventResults[0], time() + -1, "/");
+  setcookie("relevantDate", $eventResults[1], time() + -1, "/");
+  setcookie("nextRelevantDate", $eventResults[2], time() + -1, "/");
+}
 if (!isset($_COOKIE["relevantDate"])) {
   $eventResults = getOpenCloseDates();
   ob_start();
@@ -173,12 +179,6 @@ if (!isset($_COOKIE["relevantDate"])) {
   $isOpen = (bool)$_COOKIE["isOpen"];
   $relevantDate = new DateTime($_COOKIE["relevantDate"]);
   $nextRelevantDate = new DateTime($_COOKIE["nextRelevantDate"]);
-}
-$current = new DateTime(Date());
-if ($current >= $relevantDate) {
-  setcookie("isOpen", $eventResults[0], time() + -1, "/");
-  setcookie("relevantDate", $eventResults[1], time() + -1, "/");
-  setcookie("nextRelevantDate", $eventResults[2], time() + -1, "/");
 }
 
 //isOpen - Boolean - Is the library currently open at this instant?
