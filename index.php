@@ -120,7 +120,7 @@
 				<div class="arrow right hover"  style="width: 30px;"></div>
 				<div id="reel">
 					<div class="bulletin">
-						<img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/promote_charging_station.png" alt="Charging Station" title="promote_charging_station.png">
+						<a href="/departments/reference/desk/index.php"><img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/research.png" alt="Reference Desk Status" title="click to see current Ref Status"></a>
 					</div>
 					<div class="bulletin">
 						<img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/promote_archives_full.png" alt="University Archives" title="promote_archives_full.png">
