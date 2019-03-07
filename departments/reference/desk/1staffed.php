@@ -20,11 +20,14 @@
   </div>
 
   <div class="right center">
-    <h5>Reference Desk is currently staffed by</h5>
+    <h5>Currently staffed by</h5>
     <h2 class="no-margin-top center">Ann Johnston</h2>
     <p><a href="/forms/email/index.php?id=009"><img align="absmiddle" src="/img/email.png" alt="email" title="contact via email"/></a>
     <i> | 815-939-5355</i></p>
-    <p>The reference staff sits at the reference desk to assist with research and library specific questions.</p>
+    <p>
+      Our reference staff sit at the reference desk in order to assist with research and library specific questions.
+      Please "interrupt" us.
+    </p>
   </div>
 </div>
 

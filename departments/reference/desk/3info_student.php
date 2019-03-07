@@ -20,11 +20,12 @@
     </div>
 
     <div class="right center">
-      <h5 class="no-margin-top center">Reference Desk is<br />
-      currently staffed by</h5>
+      <h5 class="no-margin-top center">Currently staffed by</h5>
       <h2>Informatics Student</h2>
       <p><em>815-939-5355</em></p>
-      <p>Informatic Students can assist you with printing needs and minor technology needs. They can take a reference referral. </p>
+      <p>
+        Informatic students can assist you with printing needs and minor technology needs. They can take a message.
+      </p>
     </div>
   </div>
 
