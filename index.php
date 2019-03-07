@@ -25,81 +25,6 @@
   //$img = array('img_2392.jpg', 'img_2400.jpg', 'img_2412.jpg', 'chess-cut.jpg', "books.png" ); // array of filenames
   //$i = rand(0, count($img)-1); // generate random number size of the array
   //$selHomeHeroImg = "$img[$i]"; // set variable equal to which random filename was chosen
-	if(file_exists('./vendor/autoload.php')) {
-		require_once('./vendor/autoload.php');
-	}
-
-	//Retrieves google calendar client
-	function getClient()
-	{
-	    $client = new Google_Client();
-	    $client->setApplicationName('Benner Library');
-	    $client->setScopes(Google_Service_Calendar::CALENDAR_READONLY);
-	    $client->setAuthConfig('credentials.json');
-	    $client->setAccessType('offline');
-	    $client->setPrompt('select_account consent');
-
-	    // Load previously authorized token from a file, if it exists.
-	    // The file token.json stores the user's access and refresh tokens, and is
-	    // created automatically when the authorization flow completes for the first
-	    // time.
-	    $tokenPath = 'token.json';
-	    if (file_exists($tokenPath)) {
-	        $accessToken = json_decode(file_get_contents($tokenPath), true);
-	        $client->setAccessToken($accessToken);
-	    }
-
-	    // If there is no previous token or it's expired.
-	    if ($client->isAccessTokenExpired()) {
-	        // Refresh the token if possible, else fetch a new one.
-	        if ($client->getRefreshToken()) {
-	            $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-	        } else {
-	            // Request authorization from the user.
-	            $authUrl = $client->createAuthUrl();
-	            printf("Open the following link in your browser:\n%s\n", $authUrl);
-	            print 'Enter verification code: ';
-	            $authCode = trim(fgets(STDIN));
-
-	            // Exchange authorization code for an access token.
-	            $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-	            $client->setAccessToken($accessToken);
-
-	            // Check to see if there was an error.
-	            if (array_key_exists('error', $accessToken)) {
-	                throw new Exception(join(', ', $accessToken));
-	            }
-	        }
-	        // Save the token to a file.
-	        if (!file_exists(dirname($tokenPath))) {
-	            mkdir(dirname($tokenPath), 0700, true);
-	        }
-	        file_put_contents($tokenPath, json_encode($client->getAccessToken()));
-	    }
-	    return $client;
-	}
-
-	function getEvents($numEvents = 2) {
-		if(file_exists('credentials.json')) {
-			// Get the API client and construct the service object.
-			$client = getClient();
-			$service = new Google_Service_Calendar($client);
-
-			// Print the next 10 events on the user's calendar.
-			//Test calendar ID - agile45501@gmail.com
-			//Benner Cal ID - 72ts5jjncg48q761l4bsl9589g@group.calendar.google.com
-			$calendarId = 'agile45501@gmail.com';
-			$optParams = array(
-				'orderBy' => 'startTime',
-				'singleEvents' => true,
-				'timeMin' => date('c'),//Uses server date as minimum
-				'maxResults' => $numEvents
-			);
-			$results = $service->events->listEvents($calendarId, $optParams);
-			$events = $results->getItems();
-			return $events;
-		}
-	}
 ?>
 
 <!-- if would like to go back to static picture comment out style portion below and modify home-hero.less file -->
@@ -167,76 +92,24 @@
 
 <div class="split l25-r75 cf">
    <div class="left no-margin-top" >
-		 <div class="margin10-left">
+		 <div id="googleCal" class="margin10-left">
+			 <script>
+			 		$(document).ready(function() {
+	 					setInterval(timestamp, 5000);
+					});
 
-		 <?php
-				//If given datetime falls within the event, returns 0
-				//If given event happens before datetime, returns -1
-				//If given event happens after datetime, returns 1
-				date_default_timezone_set("America/Chicago");
-				function compareDate($gCalEvent,$dTime) {
-					$eventStart = new DateTime($gCalEvent->start->dateTime);
-					$eventEnd = new DateTime($gCalEvent->end->dateTime);
-					if($dTime < $eventStart) { return 1;}
-					else
-					if($dTime > $eventEnd) { return -1;}
-					else {  return 0; }
-				}
-
-				$events = getEvents(10);//Grab events from google calendar
-				$cDateTime = new DateTime(date('c'));//Get current date
-				$nextRelevantDateTime;
-				$isOpen = false;//Assume we are closed
-				//Iterate through events
-				for($i = 0; $i < count($events); $i++) {
-					$event = $events[$i];
-					$compResult = compareDate($event,$cDateTime);//Compare to current date
-					//echo "<p>$i :: sTime=$sTime :: eTime=$eTime :: compResult=$compResult";
-					if($compResult == 0) {//If we are WITHIN the event
-						//Check if the event is open
-						$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());
-						if($pregResult == 1) {
-							//We are open, next relevant dateTime is when we close
-							$isOpen = true;
-							$nextRelevantDateTime = new Datetime($event->end->dateTime);
-							break;
-							}
+					function timestamp() {
+	 					$.ajax({
+			 				url: 'googleCalendar.php',
+			 				success: function(data) {
+					 		$('#googleCal').html(data);
+			 				},
+	 					});
 					}
-					else {
-						if($compResult == 1) {//If we are BEFORE the event
-							$pregResult = preg_match("/(?i)\bopen\b/",$event->getSummary());//Make sure next event is an open
-							if($pregResult == 1) {
-								$nextRelevantDateTime = new Datetime($event->start->dateTime);
-								$isOpen = false;//If we haven't broken at this point, we are not inside an open event
-								break;
-							}
-						}
-					}
-					//If compResult is -1, the event came and went already and we don't care
-				}
-
-				if($isOpen) {
-					echo "<div style=\"text-align: center\"><img src=\"/about/calendar/img/open_purple.png\" alt=\"open_purple.png\"></div>";
-					echo "<p>The Library will close at ";
-					echo date_format($nextRelevantDateTime,"g:ia");
-					echo "</p>";
-				}
-				else {
-					echo"<div style=\"text-align: center\"><img src=\"/about/calendar/img/closed_purple.png\" alt=\"closed_purple.png\"></div>";
-					echo "<p>The Library will open on ";
-					echo date_format($nextRelevantDateTime,"m/d");
-					echo " at ";
-					echo date_format($nextRelevantDateTime,"g:ia");
-					echo "</p>";
-				}
-
-				//Print time and UTC designation
-				$cReadableTime = date('g:ia (T)');
-				echo "<p>It is currently $cReadableTime</p>";
-				echo "<p><a href=/about/calendar/index.php>Full Calendar</a></p>"
-
-
-		  ?>
+			 </script>
+		 	<?php
+				include_once("googleCalendar.php");
+		 	?>
 			</div>
 	</div>
 
@@ -247,7 +120,7 @@
 				<div class="arrow right hover"  style="width: 30px;"></div>
 				<div id="reel">
 					<div class="bulletin">
-						<img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/promote_charging_station.png" alt="Charging Station" title="promote_charging_station.png">
+						<a href="/departments/reference/desk/index.php"><img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/research.png" alt="Reference Desk Status" title="click to see current Ref Status"></a>
 					</div>
 					<div class="bulletin">
 						<img id="previewImg" src="https://library.olivet.edu/img/bulletins/220x260/promote_archives_full.png" alt="University Archives" title="promote_archives_full.png">
