@@ -24,7 +24,7 @@ function getClient()
         $accessToken = json_decode(file_get_contents($tokenPath), true);
         $client->setAccessToken($accessToken);
     }
-	
+
     // If there is no previous token or it's expired.
     if ($client->isAccessTokenExpired()) {
         // Refresh the token if possible, else fetch a new one.
@@ -66,7 +66,7 @@ function getEvents($minTime,$numEvents = 10 ) {
     // Print the next 10 events on the user's calendar.
     //Test calendar ID - agile45501@gmail.com
     //Benner Cal ID - 72ts5jjncg48q761l4bsl9589g@group.calendar.google.com
-    $calendarId = 'agile45501@gmail.com';
+    $calendarId = '72ts5jjncg48q761l4bsl9589g@group.calendar.google.com';
     $optParams = array(
       'orderBy' => 'startTime',
       'singleEvents' => true,
@@ -163,7 +163,7 @@ date_default_timezone_set("America/Chicago");
 
 //Use cookies to reduce API calls from page refreshes
 if (!(isset($_COOKIE["relevantDate"]) && isset($_COOKIE["nextRelevantDate"]))) {//If no cookie is set for calendar dates
-  $eventResults = getOpenCloseDates();//Get new ones  
+  $eventResults = getOpenCloseDates();//Get new ones
   ob_start();//Set cookies
       setcookie("isOpen", $eventResults[0], time() + 300, "/");
       setcookie("relevantDate", $eventResults[1], time() + 300, "/");
@@ -177,7 +177,7 @@ if (!(isset($_COOKIE["relevantDate"]) && isset($_COOKIE["nextRelevantDate"]))) {
   $relevantDate = new DateTime($_COOKIE["relevantDate"]);
   $nextRelevantDate = new DateTime($_COOKIE["nextRelevantDate"]);
 }
-  
+
 $current = new DateTime(Date('c'));
 if ($current >= $relevantDate) {
   setcookie("isOpen", $eventResults[0], time() + -1, "/");

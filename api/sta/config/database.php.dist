@@ -1,0 +1,22 @@
+<?php
+
+class Database {
+
+     // specify your own database credentials
+     private $host = "";
+     private $username = "";
+     private $password = "";
+     private $database = "";
+     public $conn;
+
+
+
+     // get the database connection
+     public function getConnection() {
+        $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database);
+
+        return $this->conn;
+     }
+}
+
+?>

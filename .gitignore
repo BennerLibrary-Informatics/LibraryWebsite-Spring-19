@@ -6,3 +6,4 @@
 credentials.json
 token.json
 /vendor/
+/api/*/config/database.php
