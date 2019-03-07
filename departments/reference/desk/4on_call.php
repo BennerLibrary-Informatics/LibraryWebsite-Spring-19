@@ -25,7 +25,11 @@
     <h2 class="no-margin-top center">Matt Marcukaitis</h2>
       <p><a href="/forms/email/index.php?id=020"><img align="absmiddle" src="/img/email.png" alt="email" title="contact via email"/></a>
       <i> | 815-928-5511</i></p>
-      <p>Even though the reference library staff member is not physically at the desk they are on call. This means that you can contact them via their ONU email or phone. They will also come out to the desk just ask at the Circulation desk to give me a call.</p>
+      <p>
+        Even though the reference staff member is not physically at the desk currently. He or she is on call.
+        This means that you can contact him/her by ONU email or phone.
+        He/she will also be happy to meet you at the reference desk, just ask a student at one of the service desks for help.
+      </p>
     </div>
   </div>
 
