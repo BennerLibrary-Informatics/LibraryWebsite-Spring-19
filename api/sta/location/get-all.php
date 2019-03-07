@@ -12,11 +12,30 @@ include_once '../objects/location.php';
  $result = $location->getLocations();
 
  $locations["locations"] = array();
- while ($row = $result->fetch_assoc()) {
-   array_push($locations["locations"], $row);
+ $num = $result->num_rows;
+ if($num>0) {
+   while ($row = $result->fetch_assoc()) {
+
+     $newRow = array(
+       "id" => $row["locAID"],
+       "title" => $row["locTitle"],
+       "dept" => $row["FK_deptID"]
+     );
+     array_push($locations["locations"], $newRow);
+   }
+
+   http_response_code(200);
+   echo json_encode($locations);
  }
- 
- http_response_code(200);
- echo json_encode($locations);
+ else {
+   // set response code - 404 Not found
+    http_response_code(404);
+
+    // tell the user no products found
+    echo json_encode(
+        array("message" => "No locations found.")
+    );
+ }
+
 
  ?>
