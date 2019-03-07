@@ -164,11 +164,9 @@ date_default_timezone_set("America/Chicago");
 //Use cookies to reduce API calls from page refreshes
 if (!(isset($_COOKIE["relevantDate"]) && isset($_COOKIE["nextRelevantDate"]))) {//If no cookie is set for calendar dates
   $eventResults = getOpenCloseDates();//Get new ones
-  ob_start();//Set cookies
-      setcookie("isOpen", $eventResults[0], time() + 300, "/");
-      setcookie("relevantDate", $eventResults[1], time() + 300, "/");
-      setcookie("nextRelevantDate", $eventResults[2], time() + 300, "/");
-  ob_end_flush();
+  setcookie("isOpen", $eventResults[0], time() + 300, "/");
+  setcookie("relevantDate", $eventResults[1], time() + 300, "/");
+  setcookie("nextRelevantDate", $eventResults[2], time() + 300, "/");
   $isOpen = (bool)$eventResults[0];
   $relevantDate = new DateTime($eventResults[1]);
   $nextRelevantDate = new DateTime($eventResults[2]);
