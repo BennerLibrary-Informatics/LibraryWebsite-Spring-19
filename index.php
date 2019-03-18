@@ -100,7 +100,7 @@
 
 					function timestamp() {
 	 					$.ajax({
-			 				url: 'googleCalendar.php',
+			 				url: 'googleCalendar.php?try=2',
 			 				success: function(data) {
 					 		$('#googleCal').html(data);
 			 				},

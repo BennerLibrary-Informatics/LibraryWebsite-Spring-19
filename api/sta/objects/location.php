@@ -9,14 +9,15 @@ class Location {
   public $description;
   public $active;
 
+  // constructor with $db as database connection
+  public function __construct($db){
+      $this->conn = $db;
+  }
+
   public function getLocations() {
     $sql = "SELECT locAID, locTitle, FK_deptID, locActive FROM sta_location";
     $query = $this->conn->query($sql);
     return $query;
-  }
-  // constructor with $db as database connection
-  public function __construct($db){
-      $this->conn = $db;
   }
 
   public function getById($queryId){
@@ -25,8 +26,12 @@ class Location {
     return $query;
   }
 
+  public function getByName($locName) {
+    $sql = "SELECT locAID, locTitle, FK_deptID, locActive FROM sta_location WHERE locTitle='$locName'";
+    $query = $this->conn->query($sql);
+    return $query;
+  }
+
 }
-
-
 
  ?>

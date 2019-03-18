@@ -9,12 +9,24 @@ include_once '../objects/location.php';
  $db = $database->getConnection();
  $location = new Location($db);
  $result = $location->getById($_GET["id"]);
-  $row = $result->fetch_assoc();
+ $row = $result->fetch_assoc();
 
+ $num = $result->num_rows;
+ if($num>0) {
   $payload = array (
     "id" => $row["locAID"],
     "title" => $row["locTitle"],
     "dept" => $row["FK_deptID"]
   );
+  http_response_code(200);
   echo json_encode($payload);
+} else {
+  // set response code - 404 Not found
+   http_response_code(404);
+
+   // tell the user no products found
+   echo json_encode(
+       array("message" => "No locations found with this ID.")
+   );
+}
  ?>
