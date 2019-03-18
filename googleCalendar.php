@@ -161,19 +161,27 @@ try {
 //Make sure all comparisons are done in CST time
 date_default_timezone_set("America/Chicago");
 
-//Use cookies to reduce API calls from page refreshes
-if (!(isset($_COOKIE["relevantDate"]) && isset($_COOKIE["nextRelevantDate"]))) {//If no cookie is set for calendar dates
+if(isset($_GET["try"])) {
+  //Use cookies to reduce API calls from page refreshes
+  if (!(isset($_COOKIE["relevantDate"]) && isset($_COOKIE["nextRelevantDate"]))) {//If no cookie is set for calendar dates
+    $eventResults = getOpenCloseDates();//Get new ones
+    setcookie("isOpen", $eventResults[0], time() + 300, "/");
+    setcookie("relevantDate", $eventResults[1], time() + 300, "/");
+    setcookie("nextRelevantDate", $eventResults[2], time() + 300, "/");
+    $isOpen = (bool)$eventResults[0];
+    $relevantDate = new DateTime($eventResults[1]);
+    $nextRelevantDate = new DateTime($eventResults[2]);
+  } else {//Retrieve date variables from cookies
+    $isOpen = (bool)$_COOKIE["isOpen"];
+    $relevantDate = new DateTime($_COOKIE["relevantDate"]);
+    $nextRelevantDate = new DateTime($_COOKIE["nextRelevantDate"]);
+  }
+
+} else {
   $eventResults = getOpenCloseDates();//Get new ones
-  setcookie("isOpen", $eventResults[0], time() + 300, "/");
-  setcookie("relevantDate", $eventResults[1], time() + 300, "/");
-  setcookie("nextRelevantDate", $eventResults[2], time() + 300, "/");
   $isOpen = (bool)$eventResults[0];
   $relevantDate = new DateTime($eventResults[1]);
   $nextRelevantDate = new DateTime($eventResults[2]);
-} else {//Retrieve date variables from cookies
-  $isOpen = (bool)$_COOKIE["isOpen"];
-  $relevantDate = new DateTime($_COOKIE["relevantDate"]);
-  $nextRelevantDate = new DateTime($_COOKIE["nextRelevantDate"]);
 }
 
 $current = new DateTime(Date('c'));
