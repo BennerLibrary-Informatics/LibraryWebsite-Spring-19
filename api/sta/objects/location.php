@@ -20,14 +20,14 @@ class Location {
     return $query;
   }
 
-  public function getById($queryId){
-    $sql = "SELECT locAID, locTitle, FK_deptID, locActive FROM sta_location WHERE locAID=$queryId";
+  public function getById($idQuery){
+    $sql = "SELECT locAID, locTitle, FK_deptID, locActive FROM sta_location WHERE locAID=$idQuery";
     $query = $this->conn->query($sql);
     return $query;
   }
 
-  public function getByName($locName) {
-    $sql = "SELECT locAID, locTitle, FK_deptID, locActive FROM sta_location WHERE locTitle='$locName'";
+  public function getByName($nameQuery) {
+    $sql = "SELECT locAID, locTitle, FK_deptID, locActive FROM sta_location WHERE locTitle='$nameQuery'";
     $query = $this->conn->query($sql);
     return $query;
   }
