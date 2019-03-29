@@ -60,7 +60,7 @@ include_once '../objects/responsibility.php';
 
     // tell the user no products found
     echo json_encode(
-        array("message" => "No statuses found or no one clocked in.")
+        array("message" => "No statuses found or no one clocked in covering '$_GET[name]'.")
     );
  }
 
