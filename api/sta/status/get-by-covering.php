@@ -41,7 +41,7 @@ include_once '../objects/responsibility.php';
      }
 
      $newRow = array(
-       "userID" => $row["FK_userID"],
+       "userID" => hash("sha256", $row["FK_userID"]),
        "location" => $locationTitle,
        "covering" => $coveringTitle,
        "responsibility" => $resTitle,

@@ -26,7 +26,7 @@ include_once '../objects/responsibility.php';
 
    // tell the user no products found
    echo json_encode(
-       array("message" => "No responsibilites found with this ID.")
+       array("message" => "No responsibilities found with this ID.")
    );
 }
  ?>
