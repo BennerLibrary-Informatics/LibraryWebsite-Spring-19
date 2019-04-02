@@ -197,7 +197,7 @@
 
 	        		<li><a href="/donations/index.php">Donations</a></li>
 	        		<li><a href="/forms/student-job-application/index.php">Student Job Application</a></li>
-					<li><a href="https://apps.bennerlibrary.com/sa" target="_blank">Staff Access</a> &#183; <a href="https://apps.bennerlibrary.com/sta/#/status" target="_blank">Status</a> &#183 <a href="/bin/imus/login.php" target="_blank">IMUS</a></li>
+					<li><a href="https://apps.bennerlibrary.com/sa" target="_blank">Staff Access</a> &#183; <a href="https://agile.bennerlibrary.com/info-apps/sta/#/status" target="_blank">Status</a> &#183 <a href="/bin/imus/login.php" target="_blank">IMUS</a></li>
 					<li><a class="do-link" href="/forms/email/index.php?id=105">Webmaster</a></li>
 	        	</ul>
 	        	<ul class="right">
