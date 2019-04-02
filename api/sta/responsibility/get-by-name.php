@@ -21,7 +21,7 @@ $result = $responsibility->getByName($_GET["name"]);
        "title" => $row["resTitle"],
        "dept" => $row["FK_deptID"]
      );
-     array_push($responsibilities["responsibilites"], $newRow);
+     array_push($responsibilities["responsibilities"], $newRow);
    }
 
    http_response_code(200);

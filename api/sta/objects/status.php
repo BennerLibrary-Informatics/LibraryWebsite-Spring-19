@@ -56,6 +56,13 @@ class Status {
     return $query;
   }
 
+  public function getByDepartment($nameQuery) {
+
+    $sql = "SELECT FK_locAIDPhysical, FK_resAID, FK_noteAID, FK_userID, FK_deptID, FK_locAIDCovering FROM sta_status WHERE FK_deptID='$nameQuery'";
+    $query = $this->conn->query($sql);
+    return $query;
+  }
+
 }
 
  ?>
