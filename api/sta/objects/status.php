@@ -1,5 +1,4 @@
 <?php
-include_once './location.php';
 
 class Status {
   private $conn;
@@ -11,8 +10,7 @@ class Status {
   public $note;
   public $responsibility;
 
-
-
+  // constructor with $db as database connection
   public function __construct($db){
       $this->conn = $db;
   }

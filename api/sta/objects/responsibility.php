@@ -9,9 +9,11 @@ class Responsibility {
   public $description;
   public $active;
 
+  // constructor with $db as database connection
   public function __construct($db){
       $this->conn = $db;
   }
+
   public function getRes() {
     $sql = "SELECT resAID, resTitle, FK_deptID FROM sta_responsibility";
     $query = $this->conn->query($sql);
@@ -29,6 +31,7 @@ class Responsibility {
     $query = $this->conn->query($sql);
     return $query;
   }
+
 }
 
  ?>
