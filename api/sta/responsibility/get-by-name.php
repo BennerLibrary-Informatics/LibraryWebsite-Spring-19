@@ -11,7 +11,7 @@ $responsibility = new Responsibility($db);
 
 $result = $responsibility->getByName($_GET["name"]);
 
- $responsibilities["responsibilites"] = array();
+ $responsibilities["responsibilities"] = array();
  $num = $result->num_rows;
  if($num>0) {
    while ($row = $result->fetch_assoc()) {
