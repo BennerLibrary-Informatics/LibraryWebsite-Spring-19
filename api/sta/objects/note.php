@@ -13,6 +13,7 @@ class Note {
   public function __construct($db){
       $this->conn = $db;
   }
+
   public function getNotes() {
     $sql = "SELECT noteAID, noteTitle, FK_deptID FROM sta_note";
     $query = $this->conn->query($sql);
@@ -30,5 +31,6 @@ class Note {
     $query = $this->conn->query($sql);
     return $query;
   }
+  
 }
  ?>
