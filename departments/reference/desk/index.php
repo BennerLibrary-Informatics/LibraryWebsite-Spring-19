@@ -65,12 +65,12 @@
   <hr />
   <h5>NOTES for Developers:</h5>
   <ul>
-    <li>There is a order to fallow when looking at the status:
+    <li>There is a order to follow when looking at the status:
       <ol>
-        <li>the Department is benlib and Location is Reference desk stop processing goto option 1 below</li>
-        <li>the Department is info   and Location is Reference desk could be option 2 or 3 below depanding on next item</li>
+        <li>the Department is benlib and Location is Reference desk stop processing go to option 1 below</li>
+        <li>the Department is info and Location is Reference desk could be option 2 or 3 below depanding on next item</li>
         <li>the Department is benlib and Covering is Reference desk could be option 2 or 4 depending on previous item</li>
-        <li>if none of the above goto to option 5 below</li>
+        <li>if none of the above go to option 5 below</li>
       </ol>
   </ul>
 
