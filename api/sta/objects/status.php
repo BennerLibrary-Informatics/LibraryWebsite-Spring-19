@@ -1,5 +1,4 @@
 <?php
-include_once './location.php';
 
 class Status {
   private $conn;
@@ -11,8 +10,7 @@ class Status {
   public $note;
   public $responsibility;
 
-
-
+  // constructor with $db as database connection
   public function __construct($db){
       $this->conn = $db;
   }
@@ -52,6 +50,13 @@ class Status {
     for($index = 1; $index<sizeof($values); $index++) {
       $sql .= " OR FK_locAIDPhysical=$values[$index]";
     }
+    $query = $this->conn->query($sql);
+    return $query;
+  }
+
+  public function getByDepartment($nameQuery) {
+
+    $sql = "SELECT FK_locAIDPhysical, FK_resAID, FK_noteAID, FK_userID, FK_deptID, FK_locAIDCovering FROM sta_status WHERE FK_deptID='$nameQuery'";
     $query = $this->conn->query($sql);
     return $query;
   }

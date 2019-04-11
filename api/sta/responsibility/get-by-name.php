@@ -11,7 +11,7 @@ $responsibility = new Responsibility($db);
 
 $result = $responsibility->getByName($_GET["name"]);
 
- $responsibilities["responsibilites"] = array();
+ $responsibilities["responsibilities"] = array();
  $num = $result->num_rows;
  if($num>0) {
    while ($row = $result->fetch_assoc()) {
@@ -21,7 +21,7 @@ $result = $responsibility->getByName($_GET["name"]);
        "title" => $row["resTitle"],
        "dept" => $row["FK_deptID"]
      );
-     array_push($responsibilities["responsibilites"], $newRow);
+     array_push($responsibilities["responsibilities"], $newRow);
    }
 
    http_response_code(200);
