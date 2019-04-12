@@ -14,53 +14,91 @@
 <!-- ===== content below here ========================================================== -->
 <h1>Currently at Reference Desk</h1>
 
-	<div class="split l50-r50 cf">
-		<div class="left center">
-        <img src="/img/staff/photo_filler.jpg" />
-        <h5 class="no-margin-top center">Reference Desk is<br />
-          currently staffed by</h5>
-          <h2>Informatics Student</h2>
-        <p>Informatic Students can assist you with printing needs and minor technology needs. They can either contact an oncall reference staff to help you with research or take a reference referral. </p>
-		</div>
 
-<div class="right center">
-    <img src="/img/staff/mwmarcukaitis.jpg" />
-    <h5 class="no-margin-top center">On Call<br />
-      Reference Staff</h5>
+<?php
+  //Call json file
+	$host = 'https://agile.bennerlibrary.com';
+	$locationQuery = '/api/sta/status/get-by-location.php?name=reference%20desk';
+	$coveringQuery = '/api/sta/status/get-by-covering.php?name=reference%20desk';
 
-    <h2 class="no-margin-top center">Matt Marcukaitis</h2>
-    <p>  <a href="/forms/email/index.php?id=020"><img align="absmiddle" src="/img/email.png" alt="email" title="contact via email"/></a>
-      <i> | 815-928-5511</i></p>
-    <p>This would be information about Matt... when his picture was pulled this paragraph would also uncomment and appear. Maybe an include file would be better.</p>
+	//decode json file into an associative array
+	$locationJSON = file_get_contents($host . $locationQuery); //get by location
+	$locationRefDesk = json_decode($locationJSON, true);
 
-</div>
-</div>
+	$coveringJSON = file_get_contents($host . $coveringQuery); //get by covering
+	$coveringRefDesk = json_decode($coveringJSON, true);
 
-<hr />
+	$usersInfoJSON = file_get_contents($host . '/departments/reference/desk/docs/test_user_info.json');
+	$usersInfo = json_decode ($usersInfoJSON, true);
 
-<div class="split l50-r50 cf">
-  <div class="left center">
-        <img src="/img/staff/ajohnsto.jpg" />
-        <h5>Reference Desk is<br />
-          currently staffed by</h5>
+	//call data from get-by-location and assign it to variables
 
-        <h2 class="no-margin-top center">Ann Johnston</h2>
-        <p>  <a href="/forms/email/index.php?id=009"><img align="absmiddle" src="/img/email.png" alt="email" title="contact via email"/></a>
-          <i> | 815-939-5355</i></p>
-        <p>The reference staff sits at the reference desk to assist with research and library specific questions.</p>
-      </div>
 
-      <div class="right center">
-            <img src="/img/bulletins/220x260/help_kb.png" />
-            <h5>Reference Desk is<br />
-              not currently staffed</h5>
+	if(isset($locationRefDesk['status'])) {
+		//calls info from get-by-location
+		$location = $locationRefDesk['status'][0]['location'];
+	 	$department = $locationRefDesk['status'][0]['department'];
+	 	$covering = $locationRefDesk['status'][0]['covering'];
+	 	$userID = $locationRefDesk['status'][0]['userID'];
+	} elseif (isset($coveringRefDesk)) {
+		//calls info from get-by-covering
+ 		$location = $coveringRefDesk['status'][0]['location'];
+ 		$department = $coveringRefDesk['status'][0]['department'];
+ 		$covering = $coveringRefDesk['status'][0]['covering'];
+ 		$userID = $coveringRefDesk['status'][0]['userID'];
+	} else {
+		$location = null;
+		$department = null;
+		$covering = null;
+		$userID = null;
+	}
 
-            <h2 class="no-margin-top center">Email a Library Staff member for assistance.</h2>
-            <p>  <a href="/forms/email/index.php?id=009"><img align="absmiddle" src="/img/email.png" alt="email" title="contact via email"/></a>
-              <i> | 815-939-5355</i></p>
-            <p>Even though there is no one currently staffing the reference desk, our website is open 24/7. Go to Help on the homepage for self-help links. Feel free to use the email link above to contact a staff member who will return your email within 24 to 48 hours.</p>
-          </div>
-  </div>
+
+
+
+	$FName;
+	$LName;
+	$Staff_Email;
+	$Staff_Phone_Number;
+	$Staff_Name;
+	$username;
+
+	foreach($usersInfo as $item){
+
+		if($userID == hash("sha256", $item["username"])){ //compares api username with json file username
+
+			//calls data from user_info json file and assign it to variables
+			$FName = $item['First Name'];
+			$LName = $item['Last Name'];
+			$Staff_Email = $item['email ID'];
+			$Staff_Phone_Number = $item['Phone #'];
+			$Staff_Name = $FName . " " . $LName;
+			$username = $item['username'];
+		}
+	}
+
+	$refDeskState;
+	if (!isset($covering) && $department == 'benlib') {
+		$refDeskState = "staffed";
+	} elseif(!isset($covering) && $department == 'info') {
+		$refDeskState = 'info_student';
+		//need a way to check if anyone also clocked in with benlib dept
+	} elseif(isset($covering) && $department == 'benlib') {
+		$refDeskState = 'on_call';
+	} else {
+		 $refDeskState = "no_staff";
+	}
+
+  switch ($refDeskState) {
+    case 'info_student':
+      include_once('./3info_student.php');
+      break;
+    case 'staffed':
+      include_once('./1staffed.php');
+      break;
+  }
+
+  ?>
 
   <hr />
   <h5>NOTES for Developers:</h5>
@@ -73,7 +111,6 @@
         <li>if none of the above go to option 5 below</li>
       </ol>
   </ul>
-
 
 <hr />
         <h4 class="no-margin-bottom">Other Reference Links:</h4>
