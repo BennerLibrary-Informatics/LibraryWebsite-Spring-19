@@ -46,18 +46,13 @@
     	 	$userID = $item['userID'];
       }
     }
-
-	} elseif (isset($coveringRefDesk)) {
+	}
+  if (isset($coveringRefDesk['status']) && !isset($department)) {
 		//calls info from get-by-covering
  		$location = $coveringRefDesk['status'][0]['location'];
  		$department = $coveringRefDesk['status'][0]['department'];
  		$covering = $coveringRefDesk['status'][0]['covering'];
  		$userID = $coveringRefDesk['status'][0]['userID'];
-	} else {
-		$location = null;
-		$department = null;
-		$covering = null;
-		$userID = null;
 	}
 
 	$FName;
@@ -84,11 +79,11 @@
 	$refDeskState;
 	if (!isset($covering) && $department == 'benlib' && !$infoStudentPresent) {
 		$refDeskState = "staffed";
-	} elseif(!isset($covering) && $department == 'benlib' && $infoStudentPresent) {
+	} elseif($department == 'benlib' && $infoStudentPresent) {
     $refDeskState = 'info_on_call';
   } elseif($infoStudentPresent) {
 		$refDeskState = 'info_student';
-	} elseif(isset($covering) && $department == 'benlib') {
+	} elseif(isset($covering) && $department == 'benlib' && !$infoStudentPresent) {
 		$refDeskState = 'on_call';
 	} else {
 		 $refDeskState = "no_staff";
@@ -98,6 +93,8 @@
     case 'staffed':
       include_once('./1staffed.php');
       break;
+    case 'info_on_call':
+      include_once('./2info_on_call.php');
     case 'info_student':
       include_once('./3info_student.php');
       break;
