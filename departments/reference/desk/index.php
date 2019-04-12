@@ -14,7 +14,6 @@
 <!-- ===== content below here ========================================================== -->
 <h1>Currently at Reference Desk</h1>
 
-
 <?php
   //Call json file
 	$host = 'https://agile.bennerlibrary.com';
@@ -32,7 +31,6 @@
 	$usersInfo = json_decode ($usersInfoJSON, true);
 
 	//call data from get-by-location and assign it to variables
-
 
 	if(isset($locationRefDesk['status'])) {
 		//calls info from get-by-location
@@ -52,9 +50,6 @@
 		$covering = null;
 		$userID = null;
 	}
-
-
-
 
 	$FName;
 	$LName;
@@ -80,7 +75,7 @@
 	$refDeskState;
 	if (!isset($covering) && $department == 'benlib') {
 		$refDeskState = "staffed";
-	} elseif(!isset($covering) && $department == 'info') {
+	} elseif($department == 'info') {
 		$refDeskState = 'info_student';
 		//need a way to check if anyone also clocked in with benlib dept
 	} elseif(isset($covering) && $department == 'benlib') {
@@ -125,11 +120,6 @@
           <li><a href="/departments/reference/desk/4on_call.php" target="_blank">On Call Staff</a></li>
           <li><a href="/departments/reference/desk/5no_staff.php" target="_blank">No Staff</a></li>
         </ol>
-
-
-
-
-
 
 <!-- ===== content above here ========================================================== -->
 <?php
