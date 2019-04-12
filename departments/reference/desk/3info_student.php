@@ -12,11 +12,10 @@
    include_once($path);
 ?>
 <!-- ===== content below here ========================================================== -->
-<h1>Reference Desk Status</h1>
 
   <div class="split l30-r70 cf">
     <div class="left center">
-    <img src="/departments/reference/desk/img/informatics_student_graphic.jpg" alt="graphic" />
+    <img src="/departments/reference/desk/img/student-staff.png" alt="graphic" />
     </div>
 
     <div class="right center">

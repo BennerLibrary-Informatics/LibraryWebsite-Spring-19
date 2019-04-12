@@ -17,7 +17,7 @@
   <div class="split l50-r50 cf">
     <div class="left center">
       <h5 class="no-margin-top center">Currently staffed by</h5>
-      <img src="/departments/reference/desk/img/informatics_student_graphic.jpg" alt="graphic" />
+      <img src="/departments/reference/desk/img/student-staff.png" alt="graphic" />
       <h2 class="no-margin-top center">Informatics Student</h2>
       <p><em>815-939-5355</em></p>
       <p>

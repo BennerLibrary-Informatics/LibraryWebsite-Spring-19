@@ -30,14 +30,23 @@
 	$usersInfoJSON = file_get_contents($host . '/departments/reference/desk/docs/user_info.json');
 	$usersInfo = json_decode ($usersInfoJSON, true);
 
+  $infoStudentPresent = false;
+
 	//call data from get-by-location and assign it to variables
 
 	if(isset($locationRefDesk['status'])) {
 		//calls info from get-by-location
-		$location = $locationRefDesk['status'][0]['location'];
-	 	$department = $locationRefDesk['status'][0]['department'];
-	 	$covering = $locationRefDesk['status'][0]['covering'];
-	 	$userID = $locationRefDesk['status'][0]['userID'];
+    foreach($locationRefDesk['status'] as $item) {
+      if ($item['department'] == 'info') {
+        $infoStudentPresent = true;
+      } elseif ($item['department'] == 'benlib') {
+        $location = $item['location'];
+        $department = $item['department'];
+        $covering = $item['covering'];
+    	 	$userID = $item['userID'];
+      }
+    }
+
 	} elseif (isset($coveringRefDesk)) {
 		//calls info from get-by-covering
  		$location = $coveringRefDesk['status'][0]['location'];
@@ -73,11 +82,12 @@
 	}
 
 	$refDeskState;
-	if (!isset($covering) && $department == 'benlib') {
+	if (!isset($covering) && $department == 'benlib' && !$infoStudentPresent) {
 		$refDeskState = "staffed";
-	} elseif($department == 'info') {
+	} elseif(!isset($covering) && $department == 'benlib' && $infoStudentPresent) {
+    $refDeskState = 'info_on_call';
+  } elseif($infoStudentPresent) {
 		$refDeskState = 'info_student';
-		//need a way to check if anyone also clocked in with benlib dept
 	} elseif(isset($covering) && $department == 'benlib') {
 		$refDeskState = 'on_call';
 	} else {
@@ -85,11 +95,11 @@
 	}
 
   switch ($refDeskState) {
-    case 'info_student':
-      include_once('./3info_student.php');
-      break;
     case 'staffed':
       include_once('./1staffed.php');
+      break;
+    case 'info_student':
+      include_once('./3info_student.php');
       break;
   }
 
