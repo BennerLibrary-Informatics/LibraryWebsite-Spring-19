@@ -1,11 +1,20 @@
-﻿First Name,Last Name,username,email ID,Phone #,Title
-Lauralee,Nothstine,lnothsti,027,815-939-5356,Reference & Periodicals Assistant
-Pam,Greenlee,pgreenle,002,815-928-5439,Dean of Library Services & SGCS Research Librarian
-Ann,Hugo,ahugo,012,815-939-5334,Curriculum Center Supervisor
-Ann ,Johnston,ajohnsto,010,815-939-5061,"Informatics, eResource, & Curriculum Librarian"
-Jasmine ,Cieszynski,jcieszyn,005,815-928-5449,Instructional Services & Digital Initiatives Librarian
-Judson,Strain,jlstrain,003,815-928-5438,Reference Librarian
-Kyle,Olney,kolney1,023,815-928-5490,Access Services Librarian
-Sandy,Harris,sharris3,015,815-928-5439,Interlibrary Loan Manager
-Matt,Marcukaitis,mwmarcukaitis,030,815-928-5511,Informatics Web Application Manager
-Kent,Kinnersley,krkinnersley,031,815-928-5815,Library Informatics Assistant
+First Name	Last Name	username	email ID	Phone #	Title
+Lauralee	Nothstine	lnothsti	27	815-939-5356	Reference & Periodicals Assistant
+Pam	Greenlee	pgreenle	2	815-928-5439	Dean of Library Services & SGCS Research Librarian
+Ann	Hugo	ahugo	12	815-939-5334	Curriculum Center Supervisor
+Ann 	Johnston	ajohnsto	10	815-939-5061	"Informatics, eResource, & Curriculum Librarian"
+Jasmine 	Cieszynski	jcieszyn	5	815-928-5449	Instructional Services & Digital Initiatives Librarian
+Judson	Strain	jlstrain	3	815-928-5438	Reference Librarian
+Kyle	Olney	kolney1	23	815-928-5490	Access Services Librarian
+Sandy	Harris	sharris3	15	815-928-5439	Interlibrary Loan Manager
+Matt	Marcukaitis	mwmarcukaitis	30	815-928-5511	Informatics Web Application Manager
+Kent	Kinnersley	krkinnersley	31	815-928-5815	Library Informatics Assistant
+Zach	Ackerman	zpackerman	456	815-922-0456	Student CSIS455
+Austin	Awalt	apawalt	457	815-922-0457	Student CSIS455
+Kevin	Cheney	kdcheney	458	815-922-0458	Student CSIS455
+Josh	Docea	jddocea	459	815-922-0459	Student CSIS455
+Nathan	Downey	npdowney	460	815-922-0460	Student CSIS455
+Joel	Lundahl	jmlundahl	461	815-922-0461	Student CSIS455
+Kiana	Paden	knpaden	462	815-922-0462	Student CSIS455
+Barak	Schmidgall	bjschmidgall	463	815-922-0463	Student CSIS455
+Larry	Vail	lvail	455	815-922-0455	Professor CSIS455
