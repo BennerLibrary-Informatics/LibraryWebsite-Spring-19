@@ -28,7 +28,7 @@
 	$coveringJSON = file_get_contents($host . $coveringQuery); //get by covering
 	$coveringRefDesk = json_decode($coveringJSON, true);
 
-	$usersInfoJSON = file_get_contents($host . '/departments/reference/desk/docs/test_user_info.json');
+	$usersInfoJSON = file_get_contents($host . '/departments/reference/desk/docs/user_info.json');
 	$usersInfo = json_decode ($usersInfoJSON, true);
 
 	//call data from get-by-location and assign it to variables
