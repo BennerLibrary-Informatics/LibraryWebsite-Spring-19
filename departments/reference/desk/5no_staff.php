@@ -37,7 +37,11 @@
     <li>Status activates if all of these are false:</li>
       <ul>
         <li>the Department is benlib and Location is Reference desk</li>
+		if ($department == benlib && $location == Reference desk){
+		
+		}
         <li>the Department is benlib and Covering is Reference desk</li>
+		if ($deptID == benlib && )
         <li>the Department is info   and Location is Reference desk</li>
       </ul>
     <li>None of the information on the page changes for this status</li>
