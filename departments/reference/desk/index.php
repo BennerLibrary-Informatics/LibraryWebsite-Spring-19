@@ -95,6 +95,7 @@
       break;
     case 'info_on_call':
       include_once('./2info_on_call.php');
+      break;
     case 'info_student':
       include_once('./3info_student.php');
       break;
