@@ -12,18 +12,17 @@
    include_once($path);
 ?>
 <!-- ===== content below here ========================================================== -->
-<h1>Reference Desk Status</h1>
 
 <div class="split l30-r70 cf">
   <div class="left center">
-    <a href="/forms/email/index.php?id=009"><img src="/departments/reference/desk/img/staffed/ajohnsto.jpg" alt="graphic" /></a>
+    <a href="/forms/email/index.php?id=009"><?php echo "<img src=/departments/reference/desk/img/staffed/$username.jpg alt=graphic />" ?></a>
   </div>
 
   <div class="right center">
     <h5>Currently staffed by</h5>
-    <h2 class="no-margin-top center">Ann Johnston</h2>
-    <p><a href="/forms/email/index.php?id=009"><img align="absmiddle" src="/img/email.png" alt="email" title="contact via email"/></a>
-    <i> | 815-939-5355</i></p>
+    <h2 class="no-margin-top center"><?php echo $Staff_Name?></h2>
+    <p><?php echo "<a href=/forms/email/index.php?id=$Staff_Email>" ?><img align="absmiddle" src="/img/email.png" alt="email" title="contact via email"/></a>
+    <i> | <?php echo $Staff_Phone_Number ?></i></p>
     <p>
       Our reference staff sit at the reference desk in order to assist with research and library specific questions.
       Please "interrupt" us.
