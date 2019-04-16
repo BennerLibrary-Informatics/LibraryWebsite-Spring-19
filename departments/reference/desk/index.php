@@ -1,5 +1,5 @@
 <?php
-   $page_title = "Reference Desk - Benner Library";
+  $page_title = "Reference Desk - Benner Library";
 	$body_class = "";
 	$body_id = "";
 	$css = "";
@@ -12,7 +12,7 @@
    include_once($path);
 ?>
 <!-- ===== content below here ========================================================== -->
-<h1>Currently at Reference Desk</h1>
+<h1>Reference Desk Status</h1>
 
 <?php
   //Call json file
@@ -77,9 +77,9 @@
 	}
 
 	$refDeskState;
-	if (!isset($covering) && $department == 'benlib' && !$infoStudentPresent) {
+	if (!isset($covering) && $department == 'benlib') {
 		$refDeskState = "staffed";
-	} elseif($department == 'benlib' && $infoStudentPresent) {
+	} elseif($department == 'benlib' && $infoStudentPresent && isset($covering)) {
     $refDeskState = 'info_on_call';
   } elseif($infoStudentPresent) {
 		$refDeskState = 'info_student';
@@ -99,35 +99,18 @@
     case 'info_student':
       include_once('./3info_student.php');
       break;
+    case 'on_call':
+      include_once('./4on_call.php');
+      break;
+    case 'no_staff':
+      include_once('./5no_staff.php');
+      break;
+    default:
+      include_once('./5no_staff.php');
+      break;
   }
 
   ?>
-
-  <hr />
-  <h5>NOTES for Developers:</h5>
-  <ul>
-    <li>There is a order to follow when looking at the status:
-      <ol>
-        <li>the Department is benlib and Location is Reference desk stop processing go to option 1 below</li>
-        <li>the Department is info and Location is Reference desk could be option 2 or 3 below depanding on next item</li>
-        <li>the Department is benlib and Covering is Reference desk could be option 2 or 4 depending on previous item</li>
-        <li>if none of the above go to option 5 below</li>
-      </ol>
-  </ul>
-
-<hr />
-        <h4 class="no-margin-bottom">Other Reference Links:</h4>
-        <ul class="padding10">
-        <li><a href="/departments/reference/index.php">Reference Desk Schedule</a></li>
-        </ul>
-
-        <ol>
-          <li><a href="/departments/reference/desk/1staffed.php" target="_blank">Staffed</a></li>
-          <li><a href="/departments/reference/desk/2info_on_call.php" target="_blank">Informatics Student and On Call Staff</a></li>
-          <li><a href="/departments/reference/desk/3info_student.php" target="_blank">Informatics Student</a></li>
-          <li><a href="/departments/reference/desk/4on_call.php" target="_blank">On Call Staff</a></li>
-          <li><a href="/departments/reference/desk/5no_staff.php" target="_blank">No Staff</a></li>
-        </ol>
 
 <!-- ===== content above here ========================================================== -->
 <?php
