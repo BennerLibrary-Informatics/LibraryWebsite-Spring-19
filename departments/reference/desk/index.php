@@ -20,17 +20,21 @@
 	$locationQuery = '/api/sta/status/get-by-location.php?name=reference%20desk';
 	$coveringQuery = '/api/sta/status/get-by-covering.php?name=reference%20desk';
 
-	//decode json file into an associative array
-	$locationJSON = file_get_contents($host . $locationQuery); //get by location
-	$locationRefDesk = json_decode($locationJSON, true);
-
-	$coveringJSON = file_get_contents($host . $coveringQuery); //get by covering
-	$coveringRefDesk = json_decode($coveringJSON, true);
-
 	$usersInfoJSON = file_get_contents($host . '/departments/reference/desk/docs/user_info.json');
 	$usersInfo = json_decode ($usersInfoJSON, true);
 
   $infoStudentPresent = false;
+
+  if(strpos(get_headers($host.$locationQuery)[0], '200')){
+  	  //decode json file into an associative array
+	$locationJSON = file_get_contents($host . $locationQuery); //get by location
+	$locationRefDesk = json_decode($locationJSON, true);
+  }
+
+  if(strpos(get_headers($host.$coveringQuery)[0], '200')){
+	$coveringJSON = file_get_contents($host . $coveringQuery); //get by covering
+	$coveringRefDesk = json_decode($coveringJSON, true);
+  }
 
 	//call data from get-by-location and assign it to variables
 
@@ -43,7 +47,7 @@
         $location = $item['location'];
         $department = $item['department'];
         $covering = $item['covering'];
-    	 	$userID = $item['userID'];
+    	$userID = $item['userID'];
       }
     }
 	}
@@ -53,6 +57,12 @@
  		$department = $coveringRefDesk['status'][0]['department'];
  		$covering = $coveringRefDesk['status'][0]['covering'];
  		$userID = $coveringRefDesk['status'][0]['userID'];
+	}
+	elseif (!isset($department)) {
+		$location = null;
+		$department = null;
+		$covering = null;
+		$userID = null;
 	}
 
 	$FName;
