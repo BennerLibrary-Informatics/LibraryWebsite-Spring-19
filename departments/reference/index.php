@@ -53,6 +53,7 @@
 						<li>Contact the <a href="/departments/reference/contact.php">Reference Department</a></li>
 						<li><a href="/departments/reference/description.php">Reference Department Description</a></li>
 						<li><a href="/departments/reference/student-job-description.php">Student Job Description</a></li>
+            <li><a href='/departments/reference/desk/index.php'>Reference Desk Status</a></li>
 					</ul>
 				</div>
 
