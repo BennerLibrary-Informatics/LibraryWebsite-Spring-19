@@ -15,22 +15,22 @@ class Note {
   }
 
   public function getNotes() {
-    $sql = "SELECT noteAID, noteTitle, FK_deptID FROM sta_note";
+    $sql = "SELECT noteAID, noteTitle, FK_deptID FROM $this->table_name";
     $query = $this->conn->query($sql);
     return $query;
   }
 
   public function getById($idQuery) {
-    $sql = "SELECT noteAID, noteTitle, FK_deptID FROM sta_note WHERE noteAID=$idQuery";
+    $sql = "SELECT noteAID, noteTitle, FK_deptID FROM $this->table_name WHERE noteAID=$idQuery";
     $query = $this->conn->query($sql);
     return $query;
   }
 
   public function getByName($nameQuery) {
-    $sql = "SELECT noteAID, noteTitle, FK_deptID FROM sta_note WHERE noteTitle='$nameQuery'";
+    $sql = "SELECT noteAID, noteTitle, FK_deptID FROM $this->table_name WHERE noteTitle='$nameQuery'";
     $query = $this->conn->query($sql);
     return $query;
   }
-  
+
 }
  ?>
