@@ -14,7 +14,7 @@
   <div class="split l30-r70 cf padding30">
     <div class="left center">
       <a href="/forms/email/index.php?id=009">
-        <img src="/departments/reference/desk/img/email_librarian.png" alt="graphic" />
+        <img src="/departments/reference/desk/img/email-librarian.png" alt="graphic" />
       </a>
     </div>
 
@@ -22,7 +22,7 @@
       <h5>Reference Desk is not currently staffed</h5>
       <h2 class="no-margin-top center">Email a Library Staff member for assistance</h2>
       <p>
-        <a href="/forms/email/index.php?id=009">
+        <a style="text-decoration:none" href="/forms/email/index.php?id=009">
           <img align="absmiddle" src="/img/email.png" alt="email" title="contact via email"/>
         </a>
         <i> | 815-939-5355</i>
