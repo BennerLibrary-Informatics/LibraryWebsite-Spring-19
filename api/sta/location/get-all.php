@@ -1,4 +1,7 @@
 <?php
+/**
+* API end point returns all locations as JSON
+**/
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 

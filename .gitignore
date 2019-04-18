@@ -8,3 +8,4 @@ token.json
 /vendor/
 /api/config/database.php
 info-apps/
+/api/documentation/*
