@@ -14,9 +14,11 @@
 
 <div class="split l30-r70 cf">
   <div class="left center">
-    <a href="/forms/email/index.php?id=009">
-      <?php echo "<img src=/departments/reference/desk/img/staff/$username.jpg alt=graphic />" ?>
-    </a>
+      <?php if (file_exists('./img/staff/'.$username.'.jpg')){
+							echo "<img src=/departments/reference/desk/img/staff/$username.jpg alt=graphic />";
+						} else {
+							echo "<img src=/img/staff/photo_filler.jpg />";
+						}  ?>
   </div>
 
   <div class="right center">
