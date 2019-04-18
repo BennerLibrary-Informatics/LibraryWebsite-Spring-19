@@ -27,7 +27,11 @@
     <div class="right center">
       <h5 class="no-margin-top center">On Call<br />
       Reference Staff</h5>
-      <?php echo "<img src=/departments/reference/desk/img/staff/$username.jpg alt=graphic />" ?>
+			<?php if (file_exists('./img/staff/'.$username.'.jpg')){
+							echo "<img src=/departments/reference/desk/img/staff/$username.jpg alt=graphic />";
+						} else {
+							echo "<img src=/img/staff/photo_filler.jpg />";
+						}  ?>
       <h2 class="no-margin-top center"><?php echo $Staff_Name?></h2>
       <p>
         <?php echo "<a href=/forms/email/index.php?id=$Staff_Email>" ?>
