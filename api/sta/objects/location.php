@@ -17,7 +17,7 @@ class Location {
   }
 
   /**
-  * Summary: returns sqli query all locations
+  * Summary: returns sqli query containing all locations
   **/
   public function getLocations() {
     $sql = "SELECT locAID, locTitle, FK_deptID, locActive FROM $this->table_name";
@@ -26,7 +26,7 @@ class Location {
   }
 
   /**
-  * returns sqli query location by location ID
+  * returns sqli query containing location by location ID
   **/
   public function getById($idQuery){
     $sql = "SELECT locAID, locTitle, FK_deptID, locActive FROM $this->table_name WHERE locAID=$idQuery";
@@ -35,7 +35,7 @@ class Location {
   }
 
   /**
-  * returns sqli query location by location title
+  * returns sqli query containing location by location title
   **/
   public function getByName($nameQuery) {
     $sql = "SELECT locAID, locTitle, FK_deptID, locActive FROM $this->table_name WHERE locTitle='$nameQuery'";

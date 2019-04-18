@@ -9,7 +9,9 @@ class Responsibility {
   public $description;
   public $active;
 
-  // constructor with $db as database connection
+  /**
+  * constructor with $db as database connection
+  **/
   public function __construct($db){
       $this->conn = $db;
   }

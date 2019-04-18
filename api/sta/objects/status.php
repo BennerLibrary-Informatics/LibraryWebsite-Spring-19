@@ -10,7 +10,9 @@ class Status {
   public $note;
   public $responsibility;
 
-  // constructor with $db as database connection
+  /**
+  * constructor with $db as database connection
+  **/
   public function __construct($db){
       $this->conn = $db;
   }
@@ -55,7 +57,6 @@ class Status {
   }
 
   public function getByDepartment($nameQuery) {
-
     $sql = "SELECT FK_locAIDPhysical, FK_resAID, FK_noteAID, FK_userID, FK_deptID, FK_locAIDCovering FROM $this->table_name WHERE FK_deptID='$nameQuery'";
     $query = $this->conn->query($sql);
     return $query;
