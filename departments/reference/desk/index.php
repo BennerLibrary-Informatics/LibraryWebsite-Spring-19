@@ -25,13 +25,13 @@
 
   $infoStudentPresent = false;
 
-  if(strpos(get_headers($host.$locationQuery)[0], '200')){
+  if(strpos(get_headers($host.$locationQuery)[0], '200')) {
     //decode json file into an associative array
 	  $locationJSON = file_get_contents($host . $locationQuery); //get by location
 	  $locationRefDesk = json_decode($locationJSON, true);
   }
 
-  if(strpos(get_headers($host.$coveringQuery)[0], '200')){
+  if(strpos(get_headers($host.$coveringQuery)[0], '200')) {
 	   $coveringJSON = file_get_contents($host . $coveringQuery); //get by covering
 	   $coveringRefDesk = json_decode($coveringJSON, true);
   }
