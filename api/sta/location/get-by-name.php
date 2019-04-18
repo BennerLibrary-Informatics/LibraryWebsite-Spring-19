@@ -32,7 +32,7 @@ $result = $location->getByName($_GET["name"]);
  }
  else {
    // set response code - 404 Not found
-    http_response_code(404);
+    http_response_code(204);
 
     // tell the user no products found
     echo json_encode(
