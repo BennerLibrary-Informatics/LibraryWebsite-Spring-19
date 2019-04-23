@@ -1,16 +1,3 @@
-<?php
-	$body_class = "";
-	$body_id = "";
-	$css = "";
-	$js = "";
-?>
-
-<?php
-   $path = $_SERVER['DOCUMENT_ROOT'];
-   $path .= "/scripts/top.php";
-   include_once($path);
-?>
-<!-- ===== content below here ========================================================== -->
 
   <div class="split l50-r50 cf">
     <div class="left center">
@@ -48,10 +35,3 @@
       </p>
     </div>
   </div>
-
-<!-- ===== content above here ========================================================== -->
-<?php
-   $path = $_SERVER['DOCUMENT_ROOT'];
-   $path .= "/scripts/bottom.php";
-   include_once($path);
-?>
