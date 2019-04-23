@@ -1,16 +1,3 @@
-<?php
-	$body_class = "";
-	$body_id = "";
-	$css = "";
-	$js = "";
-?>
-
-<?php
-   $path = $_SERVER['DOCUMENT_ROOT'];
-   $path .= "/scripts/top.php";
-   include_once($path);
-?>
-<!-- ===== content below here ========================================================== -->
   <div class="split l30-r70 cf padding30">
     <div class="left center">
       <a href="/forms/email/index.php?id=009">
@@ -35,10 +22,3 @@
       </p>
     </div>
   </div>
-
-<!-- ===== content above here ========================================================== -->
-<?php
-   $path = $_SERVER['DOCUMENT_ROOT'];
-   $path .= "/scripts/bottom.php";
-   include_once($path);
-?>
