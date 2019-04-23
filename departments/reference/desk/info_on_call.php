@@ -15,7 +15,8 @@
       <h5 class="no-margin-top center">On Call<br />
       Reference Staff</h5>
 			<?php if (file_exists('./img/staff/'.$username.'.jpg')){
-							echo "<img src=/departments/reference/desk/img/staff/$username.jpg alt=graphic />";
+							echo "<img style=position:absolute src=/departments/reference/desk/img/staff/$username.jpg alt=graphic />";
+							echo "<img style=position:relative src=/departments/reference/desk/img/on-call-frame.png />";
 						} else {
 							echo "<img src=/img/staff/photo_filler.jpg />";
 						}  ?>
