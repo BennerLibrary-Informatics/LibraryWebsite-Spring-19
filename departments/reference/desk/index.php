@@ -100,22 +100,22 @@
 
   switch ($refDeskState) {
     case 'staffed':
-      include_once('./1staffed.php');
+      include_once('./staffed.php');
       break;
     case 'info_on_call':
-      include_once('./2info_on_call.php');
+      include_once('./info_on_call.php');
       break;
     case 'info_student':
-      include_once('./3info_student.php');
+      include_once('./info_student.php');
       break;
     case 'on_call':
-      include_once('./4on_call.php');
+      include_once('./on_call.php');
       break;
     case 'no_staff':
-      include_once('./5no_staff.php');
+      include_once('./no_staff.php');
       break;
     default:
-      include_once('./5no_staff.php');
+      include_once('./no_staff.php');
       break;
   }
 
