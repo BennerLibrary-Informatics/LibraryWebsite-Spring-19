@@ -18,7 +18,7 @@ class Status {
   }
 
   public function getStatus() {
-    $sql = "SELECT FK_locAIDPhysical, FK_resAID, FK_noteAID, FK_userID, FK_deptID, FK_locAIDCovering FROM $this->table_name";
+    $sql = "SELECT FK_locAIDPhysical, FK_resAID, FK_noteAID, FK_userID, FK_deptID, FK_locAIDCovering FROM $this->table_name ORDER BY stsStartTime DESC";
     $query = $this->conn->query($sql);
     return $query;
   }
@@ -35,6 +35,7 @@ class Status {
     for($index = 1; $index<sizeof($values); $index++) {
       $sql .= " OR FK_locAIDCovering=$values[$index]";
     }
+    $sql .= " ORDER BY stsStartTime DESC";
     $query = $this->conn->query($sql);
     return $query;
   }
@@ -52,12 +53,13 @@ class Status {
     for($index = 1; $index<sizeof($values); $index++) {
       $sql .= " OR FK_locAIDPhysical=$values[$index]";
     }
+    $sql .= " ORDER BY stsStartTime DESC";
     $query = $this->conn->query($sql);
     return $query;
   }
 
   public function getByDepartment($nameQuery) {
-    $sql = "SELECT FK_locAIDPhysical, FK_resAID, FK_noteAID, FK_userID, FK_deptID, FK_locAIDCovering FROM $this->table_name WHERE FK_deptID='$nameQuery'";
+    $sql = "SELECT FK_locAIDPhysical, FK_resAID, FK_noteAID, FK_userID, FK_deptID, FK_locAIDCovering FROM $this->table_name WHERE FK_deptID='$nameQuery' ORDER BY stsStartTime DESC";
     $query = $this->conn->query($sql);
     return $query;
   }
