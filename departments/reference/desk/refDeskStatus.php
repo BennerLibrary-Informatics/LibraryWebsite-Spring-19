@@ -1,6 +1,6 @@
 <script>
    $(document).ready(function() {
-     setInterval(timestamp, 5000);
+     setInterval(timestamp, 30000);
    });
 
    function timestamp() {
