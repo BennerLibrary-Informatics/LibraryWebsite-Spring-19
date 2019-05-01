@@ -53,13 +53,14 @@
  		$department = $coveringRefDesk['status'][0]['department'];
  		$covering = $coveringRefDesk['status'][0]['covering'];
  		$userID = $coveringRefDesk['status'][0]['userID'];
-	} elseif (!isset($department)) {
+	} elseif (!isset($department)) { //if department isn't set and defaults to null
 		$location = null;
 		$department = null;
 		$covering = null;
 		$userID = null;
 	}
 
+	//creates variable names
 	$FName;
 	$LName;
 	$Staff_Email;
@@ -80,37 +81,37 @@
 		}
 	}
 
-	$refDeskState;
+	$refDeskState; //checks who is logged in and set status
 	if (!isset($covering) && $department == 'benlib') {
-		$refDeskState = "staffed";
+		$refDeskState = "staffed"; //sets status = staffed
 	} elseif($department == 'benlib' && $infoStudentPresent && isset($covering)) {
-    $refDeskState = 'info_on_call';
+    $refDeskState = 'info_on_call'; //sets status = info on call
   } elseif($infoStudentPresent) {
-		$refDeskState = 'info_student';
+		$refDeskState = 'info_student'; //sets status = info student
 	} elseif(isset($covering) && $department == 'benlib' && !$infoStudentPresent) {
-		$refDeskState = 'on_call';
+		$refDeskState = 'on_call'; //sets status = on call
 	} else {
-		$refDeskState = "no_staff";
+		$refDeskState = "no_staff"; //sets status = no staff
 	}
 
-  switch ($refDeskState) {
+  switch ($refDeskState) { //checks for what the status is
     case 'staffed':
-      include_once('./status/staffed.php');
+      include_once('./status/staffed.php'); //calls staff php if status = staff
       break;
     case 'info_on_call':
-      include_once('./status/info_on_call.php');
+      include_once('./status/info_on_call.php'); //calls info on call php if status = info on call
       break;
     case 'info_student':
-      include_once('./status/info_student.php');
+      include_once('./status/info_student.php'); //calls info student php if status = info student
       break;
     case 'on_call':
-      include_once('./status/on_call.php');
+      include_once('./status/on_call.php'); //calls on call php if status = on call
       break;
     case 'no_staff':
-      include_once('./status/no_staff.php');
+      include_once('./status/no_staff.php'); //calls no staff php if status = no staff
       break;
     default:
-      include_once('./status/no_staff.php');
+      include_once('./status/no_staff.php'); //defaults to no staff php if status = null
       break;
   }
 
